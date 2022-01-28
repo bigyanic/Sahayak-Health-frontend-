@@ -2,9 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { Tabs } from "@mantine/core";
 import Cases from "./Cases";
-import ActiveCases from "./ActiveCases";
-import CriticalCases from "./CriticalCases";
-import Deaths from "./Deaths";
 
 function ListTabs() {
   const [activeTab, setActiveTab] = useState(1);
@@ -15,13 +12,13 @@ function ListTabs() {
           <Cases />
         </Tabs.Tab>
         <Tabs.Tab label="Active">
-          <ActiveCases />
+          <Cases type="activePerOneMillion" />
         </Tabs.Tab>
         <Tabs.Tab label="Critical">
-          <CriticalCases />
+          <Cases type="criticalPerOneMillion" />
         </Tabs.Tab>
         <Tabs.Tab label="Deaths">
-          <Deaths />
+          <Cases type="deaths" />
         </Tabs.Tab>
       </Tabs>
     </div>

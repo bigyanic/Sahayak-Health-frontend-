@@ -1,5 +1,6 @@
 import { MantineProvider, ColorSchemeProvider, Navbar } from "@mantine/core";
 import { React, useState } from "react";
+import Chatbot from "./Chatbot";
 import Navbarx from "./components/Navbarx";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     >
       <MantineProvider theme={{ colorScheme }} withGlobalStyles>
         <Navbarx />
+        <Chatbot />
       </MantineProvider>
     </ColorSchemeProvider>
   );

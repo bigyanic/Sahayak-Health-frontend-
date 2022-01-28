@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { scaleLinear } from "d3-scale";
+import { scaleQuantile } from "d3-scale";
 import ReactTooltip from "react-tooltip";
 import { memo } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
@@ -15,13 +15,21 @@ const MapChart = ({ setTooltipContent, type = "cases" }) => {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
 
-  const colorScale = scaleLinear()
-    .domain([min, max])
-    .range(["#ffedea", "#ff5233"]);
+  const colorScale = scaleQuantile().domain([min, max]).range([
+    // "#fff5f0",
+    "#fee0d2",
+    // "#fcbba1",
+    "#fc9272",
+    "#fb6a4a",
+    "#ef3b2c",
+    "#cb181d",
+    "#a50f15",
+    "#67000d",
+  ]);
 
   // find minimum of array.cases
   const minCases = (data) => {
-    let min = data[0].cases;
+    let min = data[0][type];
     data.forEach((d) => {
       if (d[type] < min) {
         min = d[type];
@@ -34,6 +42,7 @@ const MapChart = ({ setTooltipContent, type = "cases" }) => {
     data.forEach((d) => {
       if (d[type] > max) {
         max = d[type];
+        console.log(d);
       }
     });
     return max;
@@ -44,7 +53,7 @@ const MapChart = ({ setTooltipContent, type = "cases" }) => {
       setData(data.data);
       setMax(maxCases(data.data));
       setMin(minCases(data.data));
-      console.log(data.data);
+      console.log({ min, max, data: data.data });
     });
   }, []);
 
@@ -58,7 +67,7 @@ const MapChart = ({ setTooltipContent, type = "cases" }) => {
     >
       <div style={{ width: 800, margin: "auto" }}>
         <Card shadow="sm" padding="lg">
-          <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
+          <ComposableMap data-tip="" projectionConfig={{ scale: 170 }}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => {
@@ -80,6 +89,7 @@ const MapChart = ({ setTooltipContent, type = "cases" }) => {
                       onMouseEnter={() => {
                         const { NAME, POP_EST } = geo.properties;
                         setContent(`${NAME} — ${d[type]}`);
+                        console.log({ min, max });
                       }}
                       onMouseLeave={() => {
                         setContent("");

@@ -10,16 +10,20 @@ import {
 import TabMenu from "./TabMenu";
 import {
   BackpackIcon,
+  CalendarIcon,
   CameraIcon,
+  Half1Icon,
   HomeIcon,
   ImageIcon,
+  QuestionMarkCircledIcon,
   RocketIcon,
+  TableIcon,
 } from "@modulz/radix-icons";
 import HeaderContent from "./HeaderContent";
 import Homepage from "./Homepage";
-import Cases from "./visualization/Cases";
-import MapInBox from "./MapInBox";
+
 import ListTabs from "./visualization/ListTabs";
+import Faq from "./Faq";
 
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -37,8 +41,21 @@ function Navbarx() {
               <Tabs.Tab label="Data Visualization" icon={<CameraIcon />}>
                 <ListTabs />
               </Tabs.Tab>
+              <Tabs.Tab label="Book Appointment" icon={<CalendarIcon />}>
+                Settings tab content
+              </Tabs.Tab>
+
+              <Tabs.Tab label="Hospitals List" icon={<TableIcon />}>
+                Settings tab content
+              </Tabs.Tab>
+              <Tabs.Tab label="Covid Myths" icon={<Half1Icon />}>
+                Settings tab content
+              </Tabs.Tab>
               <Tabs.Tab label="About Project" icon={<BackpackIcon />}>
                 Settings tab content
+              </Tabs.Tab>
+              <Tabs.Tab label="FAQs" icon={<QuestionMarkCircledIcon />}>
+                <Faq />
               </Tabs.Tab>
               <Tabs.Tab
                 label="Emergency Services "
