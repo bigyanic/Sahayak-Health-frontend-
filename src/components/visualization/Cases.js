@@ -9,7 +9,7 @@ import { Card } from "@mantine/core";
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const MapChart = ({ setTooltipContent }) => {
+const MapChart = ({ setTooltipContent, type = "cases" }) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
   const [min, setMin] = useState(0);
@@ -23,17 +23,17 @@ const MapChart = ({ setTooltipContent }) => {
   const minCases = (data) => {
     let min = data[0].cases;
     data.forEach((d) => {
-      if (d.cases < min) {
-        min = d.cases;
+      if (d[type] < min) {
+        min = d[type];
       }
     });
     return min;
   };
   const maxCases = (data) => {
-    let max = data[0].cases;
+    let max = data[0][type];
     data.forEach((d) => {
-      if (d.cases > max) {
-        max = d.cases;
+      if (d[type] > max) {
+        max = d[type];
       }
     });
     return max;
@@ -69,17 +69,17 @@ const MapChart = ({ setTooltipContent }) => {
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      fill={d ? colorScale(d["cases"]) : "#F5F4F6"}
+                      fill={d ? colorScale(d[type]) : "#F5F4F6"}
                       onClick={null}
                       style={{
                         pressed: {
-                          fill: d ? colorScale(d["cases"]) : "#F5F4F6",
+                          fill: d ? colorScale(d[type]) : "#F5F4F6",
                           stroke: "none",
                         },
                       }}
                       onMouseEnter={() => {
                         const { NAME, POP_EST } = geo.properties;
-                        setContent(`${NAME} — ${d["cases"]}`);
+                        setContent(`${NAME} — ${d[type]}`);
                       }}
                       onMouseLeave={() => {
                         setContent("");
