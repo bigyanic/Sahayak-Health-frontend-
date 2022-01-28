@@ -9,19 +9,41 @@ import { Card } from "@mantine/core";
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const colorScale = scaleLinear()
-  .domain([10000, 10000000])
-  .range(["#ffedea", "#ff5233"]);
-
-// find minimum
-
 const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
   const [content, setContent] = useState("");
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
+
+  const colorScale = scaleLinear()
+    .domain([min, max])
+    .range(["#ffedea", "#ff5233"]);
+
+  // find minimum of array.cases
+  const minCases = (data) => {
+    let min = data[0].cases;
+    data.forEach((d) => {
+      if (d.cases < min) {
+        min = d.cases;
+      }
+    });
+    return min;
+  };
+  const maxCases = (data) => {
+    let max = data[0].cases;
+    data.forEach((d) => {
+      if (d.cases > max) {
+        max = d.cases;
+      }
+    });
+    return max;
+  };
 
   useEffect(() => {
     axios(`https://corona.lmao.ninja/v2/countries`).then((data) => {
       setData(data.data);
+      setMax(maxCases(data.data));
+      setMin(minCases(data.data));
       console.log(data.data);
     });
   }, []);
