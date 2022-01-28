@@ -1,6 +1,5 @@
 import { MantineProvider, ColorSchemeProvider, Navbar } from "@mantine/core";
 import { React, useState } from "react";
-import TabMenu from "./components/TabMenu";
 import Navbarx from "./components/Navbarx";
 
 function App() {

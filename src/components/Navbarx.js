@@ -17,6 +17,9 @@ import {
 } from "@modulz/radix-icons";
 import HeaderContent from "./HeaderContent";
 import Homepage from "./Homepage";
+import Cases from "./visualization/Cases";
+import MapInBox from "./MapInBox";
+import ListTabs from "./visualization/ListTabs";
 
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -32,7 +35,7 @@ function Navbarx() {
                 <Homepage />
               </Tabs.Tab>
               <Tabs.Tab label="Data Visualization" icon={<CameraIcon />}>
-                Messages tab content
+                <ListTabs />
               </Tabs.Tab>
               <Tabs.Tab label="About Project" icon={<BackpackIcon />}>
                 Settings tab content

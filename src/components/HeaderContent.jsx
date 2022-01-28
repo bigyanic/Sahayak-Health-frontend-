@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Header,
-  ActionIcon,
-  TimelineItem,
-  Title,
-  useMantineColorScheme,
-} from "@mantine/core";
-import TabMenu from "./TabMenu";
+import { ActionIcon, Title, useMantineColorScheme } from "@mantine/core";
 import { SunIcon, MoonIcon } from "@modulz/radix-icons";
 
 const HeaderContent = () => {
