@@ -3,9 +3,7 @@ import {
   Navbar,
   Header,
   Tabs,
-  ActionIcon,
   useMantineColorScheme,
-  Text,
 } from "@mantine/core";
 import TabMenu from "./TabMenu";
 import {
@@ -14,7 +12,6 @@ import {
   CameraIcon,
   Half1Icon,
   HomeIcon,
-  ImageIcon,
   QuestionMarkCircledIcon,
   RocketIcon,
   TableIcon,

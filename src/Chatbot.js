@@ -26,7 +26,7 @@ function Chatbot() {
     <div className="App">
       <Widget
         title={"Bigyan's covid help line"}
-        subtitle={"Wassap biches"}
+        subtitle={"Wassap Brothers"}
         handleNewUserMessage={(message) => handleNewUserMessage(message)}
         emojis="yes"
       />

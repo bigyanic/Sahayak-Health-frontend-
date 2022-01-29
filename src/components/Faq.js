@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { Accordion } from "@mantine/core";
 import axios from "axios";
-import { Card, useMantineTheme } from "@mantine/core";
+import { Title, Space, useMantineTheme } from "@mantine/core";
 
 function Faq() {
   const theme = useMantineTheme();
@@ -29,7 +29,13 @@ function Faq() {
     );
   });
 
-  return <div>{arr}</div>;
+  return (
+    <div>
+      <Title order={1}>Frequently Asked Questions About Covid-19</Title>
+      <Space h="xl" />
+      {arr}
+    </div>
+  );
 }
 
 export default Faq;
