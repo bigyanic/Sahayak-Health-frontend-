@@ -21,6 +21,8 @@ import Homepage from "./Homepage";
 
 import ListTabs from "./visualization/ListTabs";
 import Faq from "./Faq";
+import News from "./News";
+import HospitalList from "./HospitalList";
 
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -43,7 +45,7 @@ function Navbarx() {
               </Tabs.Tab>
 
               <Tabs.Tab label="Hospitals List" icon={<TableIcon />}>
-                Settings tab content
+                <HospitalList />
               </Tabs.Tab>
               <Tabs.Tab label="Covid Myths" icon={<Half1Icon />}>
                 Settings tab content
@@ -53,6 +55,9 @@ function Navbarx() {
               </Tabs.Tab>
               <Tabs.Tab label="FAQs" icon={<QuestionMarkCircledIcon />}>
                 <Faq />
+              </Tabs.Tab>
+              <Tabs.Tab label="News " icon={<RocketIcon />}>
+                <News />
               </Tabs.Tab>
               <Tabs.Tab
                 label="Emergency Services "
