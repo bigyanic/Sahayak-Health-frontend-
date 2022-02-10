@@ -23,6 +23,8 @@ import ListTabs from "./visualization/ListTabs";
 import Faq from "./Faq";
 import News from "./News";
 import HospitalList from "./HospitalList";
+import CreateUser from "./CreateUser";
+import CreateUserSteps from "./CreateUserSteps";
 
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -65,6 +67,13 @@ function Navbarx() {
                 color="red"
               >
                 Settings tab content
+              </Tabs.Tab>
+              <Tabs.Tab label="Create User " color="red">
+                <CreateUser />
+              </Tabs.Tab>
+
+              <Tabs.Tab label="Create User " color="red">
+                <CreateUserSteps />
               </Tabs.Tab>
             </Tabs>
           </Navbar.Section>
