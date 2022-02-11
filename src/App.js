@@ -1,6 +1,6 @@
 import { MantineProvider, ColorSchemeProvider, Navbar } from "@mantine/core";
 import { React, useState } from "react";
-import Chatbot from "./Chatbot";
+import Chatbot from "./components/Chatbot";
 import Navbarx from "./components/Navbarx";
 
 function App() {

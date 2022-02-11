@@ -6,6 +6,7 @@ import {
   Space,
   Grid,
   useMantineTheme,
+  Title,
 } from "@mantine/core";
 
 function LoginForm() {
@@ -17,8 +18,18 @@ function LoginForm() {
   return (
     <div style={{ width: 800, margin: "auto" }}>
       <Card shadow="sm" padding="lg">
+        <Title order={1}>Create an Account</Title>
         {/* NAME */}
-        <TextInput placeholder="Your name" label="Full name" required />
+        <Space h="xl" />
+        <Grid>
+          <Grid.Col span={5}>
+            <TextInput placeholder="Your name" label="First Name" required />
+          </Grid.Col>
+          <Grid.Col span={5}>
+            <TextInput placeholder="Your name" label="Last Name" required />
+          </Grid.Col>
+        </Grid>
+
         <Space h="md" />
 
         {/* Email */}
