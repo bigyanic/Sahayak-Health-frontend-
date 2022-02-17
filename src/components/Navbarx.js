@@ -30,10 +30,10 @@ function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
-  const onChange = (active, tabKey) => {
-    setActiveTab(active);
-    // console.log("tabKey", tabKey);
-  };
+  // const onChange = (active, tabKey) => {
+  //   setActiveTab(active);
+  //   // console.log("tabKey", tabKey);
+  // };
   return (
     <AppShell
       padding="md"
