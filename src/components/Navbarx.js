@@ -23,12 +23,17 @@ import ListTabs from "./visualization/ListTabs";
 import Faq from "./Faq";
 import News from "./News";
 import HospitalList from "./HospitalList";
-import CreateUser from "./SignupLogin/CreateUser";
-import CreateUserSteps from "./SignupLogin/CreateUserSteps";
+import { AuthenticationForm } from "./SignupLogin/CreateUser";
+// import CreateUserSteps from "./SignupLogin/CreateUserSteps";
 import Myths from "./Myths";
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
+
+  const onChange = (active, tabKey) => {
+    setActiveTab(active);
+    // console.log("tabKey", tabKey);
+  };
   return (
     <AppShell
       padding="md"
@@ -70,7 +75,8 @@ function Navbarx() {
               </Tabs.Tab>
 
               <Tabs.Tab label="Create User " color="red">
-                <CreateUserSteps />
+                <AuthenticationForm />
+                {/* <CreateUserSteps /> */}
               </Tabs.Tab>
             </Tabs>
           </Navbar.Section>
