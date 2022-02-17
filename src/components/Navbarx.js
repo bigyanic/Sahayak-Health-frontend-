@@ -25,7 +25,7 @@ import News from "./News";
 import HospitalList from "./HospitalList";
 import CreateUser from "./SignupLogin/CreateUser";
 import CreateUserSteps from "./SignupLogin/CreateUserSteps";
-
+import Myths from "./Myths";
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
@@ -50,7 +50,7 @@ function Navbarx() {
                 <HospitalList />
               </Tabs.Tab>
               <Tabs.Tab label="Covid Myths" icon={<Half1Icon />}>
-                Settings tab content
+                <Myths />
               </Tabs.Tab>
               <Tabs.Tab label="About Project" icon={<BackpackIcon />}>
                 Settings tab content
