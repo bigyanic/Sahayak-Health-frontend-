@@ -26,6 +26,7 @@ import HospitalList from "./HospitalList";
 import { AuthenticationForm } from "./SignupLogin/CreateUser";
 // import CreateUserSteps from "./SignupLogin/CreateUserSteps";
 import Myths from "./Myths";
+import Uploader from "./DropZone";
 function Navbarx() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
@@ -76,6 +77,10 @@ function Navbarx() {
 
               <Tabs.Tab label="Create User " color="red">
                 <AuthenticationForm />
+                {/* <CreateUserSteps /> */}
+              </Tabs.Tab>
+              <Tabs.Tab label="Create User " color="red">
+                <Uploader />
                 {/* <CreateUserSteps /> */}
               </Tabs.Tab>
             </Tabs>
