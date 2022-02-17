@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "@mantine/hooks";
-import { EnvelopeClosedIcon, LockClosedIcon } from "@modulz/radix-icons";
+import {
+  EnvelopeClosedIcon,
+  LockClosedIcon,
+  ChatBubbleIcon,
+} from "@modulz/radix-icons";
 import {
   TextInput,
   PasswordInput,
@@ -13,7 +17,7 @@ import {
   Anchor,
   useMantineTheme,
 } from "@mantine/core";
-
+import { DatePicker } from "@mantine/dates";
 // export interface AuthenticationFormProps {
 //   noShadow?: boolean;
 //   noPadding?: boolean;
@@ -39,6 +43,8 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       email: "",
       password: "",
       confirmPassword: "",
+      address: "",
+      phonenumber: "",
       termsOfService: true,
     },
 
@@ -132,7 +138,34 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
             {...form.getInputProps("confirmPassword")}
           />
         )}
-
+        {formType === "register" && (
+          <TextInput
+            mt="md"
+            required
+            placeholder="Address"
+            label="Address"
+            icon={<EnvelopeClosedIcon />}
+            {...form.getInputProps("address")}
+          />
+        )}
+        {formType === "register" && (
+          <DatePicker
+            mt="md"
+            placeholder="Pick date"
+            label="Date of Birth"
+            required
+          />
+        )}
+        {formType === "register" && (
+          <TextInput
+            mt="md"
+            required
+            placeholder="Contact Number"
+            label="Contact Number"
+            icon={<ChatBubbleIcon />}
+            {...form.getInputProps("contactnumber")}
+          />
+        )}
         {formType === "register" && (
           <Checkbox
             mt="xl"
