@@ -16,7 +16,10 @@ function App() {
       colorScheme={colorScheme}
       toggleColorScheme={toggleColorScheme}
     >
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles>
+      <MantineProvider
+        theme={{ colorScheme, fontFamily: "Poppins" }}
+        withGlobalStyles
+      >
         <AppBody />
         <Chatbot />
       </MantineProvider>
