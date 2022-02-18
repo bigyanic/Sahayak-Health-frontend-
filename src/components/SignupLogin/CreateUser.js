@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Axios from "axios";
 import { useForm } from "@mantine/hooks";
 import {
   EnvelopeClosedIcon,
@@ -20,6 +21,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
+import axios from "axios";
 // export interface AuthenticationFormProps {
 //   noShadow?: boolean;
 //   noPadding?: boolean;
@@ -38,6 +40,18 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
     setError(null);
   };
 
+  // //forms data use state hooks
+  // const [firstname, setFirstName] = useState("");
+  // const [lastname, setLastName] = useState("");
+
+  // const [email, setEmail] = useState("");
+
+  // const [password, setPassword] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [dateofbirth, setDateofbirth] = useState("");
+
+  // const [contactnumber, setContactNumber] = useState("");
+
   const form = useForm({
     initialValues: {
       firstName: "",
@@ -45,6 +59,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       email: "",
       pswrd: "",
       confirmPassword: "",
+      dateofbirth: "",
       address: "",
       phonenumber: "",
       termsOfService: true,
@@ -72,18 +87,31 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (values) => {
     setLoading(true);
     setError(null);
-    setTimeout(() => {
-      setLoading(false);
-      setError(
-        formType === "register"
-          ? "User with this email already exists"
-          : "User with this email does not exist"
-      );
-    }, 3000);
+
+    console.log(values);
+    if (formType == "register") {
+      Axios.post("http://20.41.221.66:7000/postreg/", {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        email: values.email,
+        password: values.pswrd,
+        address: values.address,
+        date_of_birth: values.dateofbirth,
+        contact_number: values.phonenumber,
+      })
+        .then((res) => {
+          setLoading(false);
+        })
+        .catch((err) => console.error(err));
+    }
+    // else {
+    //   Axios.post(`http://20.41.221.66:7000/userlogin/`);
+    // }
   };
+  const postData = (e) => {};
 
   return (
     <div style={{ width: 500, margin: "auto" }}>
@@ -164,6 +192,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
                 icon={<CalendarIcon />}
                 label="Date of Birth"
                 required
+                {...form.getInputProps("dateofbirth")}
               />
             )}
             {formType === "register" && (
