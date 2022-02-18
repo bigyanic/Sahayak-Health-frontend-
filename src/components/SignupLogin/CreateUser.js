@@ -40,18 +40,6 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
     setError(null);
   };
 
-  // //forms data use state hooks
-  // const [firstname, setFirstName] = useState("");
-  // const [lastname, setLastName] = useState("");
-
-  // const [email, setEmail] = useState("");
-
-  // const [password, setPassword] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [dateofbirth, setDateofbirth] = useState("");
-
-  // const [contactnumber, setContactNumber] = useState("");
-
   const form = useForm({
     initialValues: {
       firstName: "",
@@ -62,7 +50,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       dateofbirth: "",
       address: "",
       phonenumber: "",
-      termsOfService: true,
+      termsOfService: false,
     },
 
     validationRules: {
@@ -73,7 +61,9 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           value
         ),
-      phonenumber: (value) => /(?:\+977[- ])?\d{2}-?\d{7,8}/.test(value),
+      phonenumber: (value) =>
+        formType === "login" ||
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
       confirmPassword: (val, value) =>
         formType === "login" || val === value.pswrd,
     },
@@ -91,8 +81,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
     setLoading(true);
     setError(null);
 
-    console.log(values);
-    if (formType == "register") {
+    if (formType === "register") {
       Axios.post("http://20.41.221.66:7000/postreg/", {
         first_name: values.firstName,
         last_name: values.lastName,
@@ -104,14 +93,22 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       })
         .then((res) => {
           setLoading(false);
+          console.log("created");
         })
         .catch((err) => console.error(err));
+    } else {
+      // console.log("loginpage");
+      Axios.post("http://20.41.221.66:7000/userlogin/", {
+        email: values.email,
+        password: values.pswrd,
+      })
+        .then((res) => {
+          // setLoading(false);
+          console.log("loggedin", res);
+        })
+        .catch((err) => console.error("error", err));
     }
-    // else {
-    //   Axios.post(`http://20.41.221.66:7000/userlogin/`);
-    // }
   };
-  const postData = (e) => {};
 
   return (
     <div style={{ width: 500, margin: "auto" }}>
@@ -127,7 +124,29 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
           }}
         >
           <form onSubmit={form.onSubmit(handleSubmit)}>
-            <LoadingOverlay visible={loading} />
+            {/* <LoadingOverlay visible={loading} />
+            Login FOrm
+            {formType === "login" && (
+              <TextInput
+                mt="md"
+                required
+                placeholder="Your email"
+                label="Email"
+                icon={<EnvelopeClosedIcon />}
+                {...form.getInputProps("email")}
+              />
+            )}
+            {formType === "login" && (
+              <PasswordInput
+                mt="md"
+                required
+                placeholder="Password"
+                label="Password"
+                icon={<LockClosedIcon />}
+                {...form.getInputProps("pswrd")}
+              />
+            )} */}
+            {/* Create user form */}
             {formType === "register" && (
               <Group grow>
                 <TextInput
@@ -146,25 +165,26 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
                 />
               </Group>
             )}
-
-            <TextInput
-              mt="md"
-              required
-              placeholder="Your email"
-              label="Email"
-              icon={<EnvelopeClosedIcon />}
-              {...form.getInputProps("email")}
-            />
-
-            <PasswordInput
-              mt="md"
-              required
-              placeholder="Password"
-              label="Password"
-              icon={<LockClosedIcon />}
-              {...form.getInputProps("pswrd")}
-            />
-
+            {(formType === "register" || formType === "login") && (
+              <TextInput
+                mt="md"
+                required
+                placeholder="Your email"
+                label="Email"
+                icon={<EnvelopeClosedIcon />}
+                {...form.getInputProps("email")}
+              />
+            )}
+            {(formType === "register" || formType === "login") && (
+              <PasswordInput
+                mt="md"
+                required
+                placeholder="Password"
+                label="Password"
+                icon={<LockClosedIcon />}
+                {...form.getInputProps("pswrd")}
+              />
+            )}
             {formType === "register" && (
               <PasswordInput
                 mt="md"
@@ -212,13 +232,11 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
                 {...form.getInputProps("termsOfService", { type: "checkbox" })}
               />
             )}
-
             {error && (
               <Text color="red" size="sm" mt="sm">
                 {error}
               </Text>
             )}
-
             {!noSubmit && (
               <Group position="apart" mt="xl">
                 <Anchor
