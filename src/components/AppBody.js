@@ -34,6 +34,7 @@ const AppBody = () => {
         <Route path="myths" element={<Myths />} />
         <Route path="viz" element={<ListTabs />} />
         <Route path="hospitals" element={<HospitalList />} />
+        <Route path="createuser" element={<AuthenticationForm />} />
       </Routes>
     </AppShell>
   );
