@@ -93,7 +93,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       })
         .then((res) => {
           setLoading(false);
-          console.log("created");
+          console.log("created", res);
         })
         .catch((err) => console.error(err));
     } else {
