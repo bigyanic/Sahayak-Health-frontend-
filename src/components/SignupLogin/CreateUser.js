@@ -50,13 +50,14 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       dateofbirth: "",
       address: "",
       phonenumber: "",
-      termsOfService: false,
+      termsOfService: true,
     },
 
     validationRules: {
       firstName: (value) => formType === "login" || value.trim().length >= 2,
       lastName: (value) => formType === "login" || value.trim().length >= 2,
-      email: (value) => /^\S+@\S+$/.test(value),
+      email: (value) =>
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value),
       pswrd: (value) =>
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           value
@@ -66,6 +67,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
       confirmPassword: (val, value) =>
         formType === "login" || val === value.pswrd,
+      termsOfService: (value) => formType === "login" || /^(true)$/.test(value),
     },
 
     errorMessages: {
@@ -74,13 +76,21 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       pswrd:
         "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
       confirmPassword: "Passwords don't match. Try again",
+      termsOfService: "You must accept our terms",
     },
   });
 
   const handleSubmit = (values) => {
     setLoading(true);
     setError(null);
-
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setError(
+    //     formType === "register"
+    //       ? "User with this email already exists"
+    //       : "User with this email does not exist"
+    //   );
+    // }, 3000);
     if (formType === "register") {
       Axios.post("http://20.41.221.66:7000/postreg/", {
         first_name: values.firstName,
@@ -124,29 +134,6 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
           }}
         >
           <form onSubmit={form.onSubmit(handleSubmit)}>
-            {/* <LoadingOverlay visible={loading} />
-            Login FOrm
-            {formType === "login" && (
-              <TextInput
-                mt="md"
-                required
-                placeholder="Your email"
-                label="Email"
-                icon={<EnvelopeClosedIcon />}
-                {...form.getInputProps("email")}
-              />
-            )}
-            {formType === "login" && (
-              <PasswordInput
-                mt="md"
-                required
-                placeholder="Password"
-                label="Password"
-                icon={<LockClosedIcon />}
-                {...form.getInputProps("pswrd")}
-              />
-            )} */}
-            {/* Create user form */}
             {formType === "register" && (
               <Group grow>
                 <TextInput
@@ -182,6 +169,9 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
                 placeholder="Password"
                 label="Password"
                 icon={<LockClosedIcon />}
+                onFocus={() => {
+                  form.validateField("pswrd");
+                }}
                 {...form.getInputProps("pswrd")}
               />
             )}
@@ -229,6 +219,9 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
               <Checkbox
                 mt="xl"
                 label="I agree to sell my soul and privacy to this corporation"
+                onFocus={() => {
+                  form.validateField("termsOfService");
+                }}
                 {...form.getInputProps("termsOfService", { type: "checkbox" })}
               />
             )}
