@@ -22,6 +22,8 @@ import {
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 // export interface AuthenticationFormProps {
 //   noShadow?: boolean;
 //   noPadding?: boolean;
@@ -105,7 +107,14 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
           setLoading(false);
           console.log("created", res);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          Swal.fire(
+            "Accouunt creation failed",
+            "User with same email already exist",
+            "error"
+          );
+          console.error(err);
+        });
     } else {
       // console.log("loginpage");
       Axios.post("http://20.41.221.66:7000/userlogin/", {
@@ -116,7 +125,14 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
           // setLoading(false);
           console.log("loggedin", res);
         })
-        .catch((err) => console.error("error", err));
+        .catch((err) => {
+          // console.err("error", err);
+          Swal.fire(
+            "Login Failed?",
+            "Email or Password already exists",
+            "error"
+          );
+        });
     }
   };
 
