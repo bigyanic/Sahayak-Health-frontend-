@@ -13,9 +13,7 @@ import { useForm } from "@mantine/hooks";
 import {
   EnvelopeClosedIcon,
   HomeIcon,
-  LockClosedIcon,
   ChatBubbleIcon,
-  CalendarIcon,
 } from "@modulz/radix-icons";
 import Dropzone from "./DropZone";
 import Axios from "axios";

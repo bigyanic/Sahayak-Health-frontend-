@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { Tabs, Navbar, ScrollArea } from "@mantine/core";
+import {
+  Tabs,
+  Navbar,
+  UnstyledButton,
+  Group,
+  Paper,
+  ScrollArea,
+  Avatar,
+  ActionIcon,
+  Space,
+  Text,
+} from "@mantine/core";
 import { useNavigate, useLocation } from "react-router";
 import { useViewportSize } from "@mantine/hooks";
-
 import TABS from "./TabData";
 
 const NavBarRouter = () => {
@@ -17,6 +27,11 @@ const NavBarRouter = () => {
     navigate(tabKey);
     setActiveTab(active);
   };
+
+  const onClickHandler = () => {
+    navigate(`/createuser`);
+  };
+
   return (
     <Navbar padding="md" width={{ base: 250 }} height={height - 60}>
       <Navbar.Section
@@ -39,7 +54,21 @@ const NavBarRouter = () => {
       </Navbar.Section>
 
       <Navbar.Section>
-        <h1>hello</h1>
+        <Paper padding="xs" withBorder>
+          <UnstyledButton variant="filled" onClick={onClickHandler}>
+            <Group>
+              <Avatar size={40} color="blue">
+                SH
+              </Avatar>
+              <div>
+                <Text>Sahayak Health</Text>
+                <Text size="xs" color="gray">
+                  Login & Signup
+                </Text>
+              </div>
+            </Group>
+          </UnstyledButton>
+        </Paper>
       </Navbar.Section>
     </Navbar>
   );

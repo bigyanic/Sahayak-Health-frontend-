@@ -8,7 +8,7 @@ import ListTabs from "./visualization/ListTabs";
 import Faq from "./Faq";
 import News from "./News";
 import HospitalList from "./HospitalList";
-import { AuthenticationForm } from "./SignupLogin/CreateUser";
+import { AuthenticationForm } from "./SignupLogin/AuthenticationForm";
 // import CreateUserSteps from "./SignupLogin/CreateUserSteps";
 import Myths from "./Myths";
 // import Uploader from "./DropZone";

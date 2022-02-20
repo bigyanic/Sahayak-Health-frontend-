@@ -45,11 +45,11 @@ const TABS = [
     label: "Appointment",
     icon: <CalendarIcon />,
   },
-  {
-    key: "createuser",
-    label: "USER",
-    icon: <CalendarIcon />,
-  },
+  // {
+  //   key: "createuser",
+  //   label: "USER",
+  //   icon: <CalendarIcon />,
+  // },
 ];
 
 export default TABS;
