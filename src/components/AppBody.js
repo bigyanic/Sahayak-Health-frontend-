@@ -13,6 +13,7 @@ import { AuthenticationForm } from "./SignupLogin/CreateUser";
 import Myths from "./Myths";
 // import Uploader from "./DropZone";
 import NavBarRouter from "./NavBarRouter";
+import Appointment from "./Appointment";
 
 const AppBody = () => {
   return (
@@ -29,7 +30,7 @@ const AppBody = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="home" element={<Homepage />} />
         <Route path="news" element={<News />} />
-        <Route path="auth" element={<AuthenticationForm />} />
+        <Route path="appointment" element={<Appointment />} />
         <Route path="faq" element={<Faq />} />
         <Route path="myths" element={<Myths />} />
         <Route path="viz" element={<ListTabs />} />

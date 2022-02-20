@@ -41,8 +41,8 @@ const TABS = [
     icon: <Half1Icon />,
   },
   {
-    key: "appointments",
-    label: "Appointments",
+    key: "appointment",
+    label: "Appointment",
     icon: <CalendarIcon />,
   },
   {
