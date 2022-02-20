@@ -8,7 +8,7 @@ const HeaderContent = () => {
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <Title order={3} style={{ flex: 1 }}>
-        Bigyan
+        Sahayak
       </Title>
 
       <ActionIcon

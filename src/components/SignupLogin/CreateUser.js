@@ -23,6 +23,7 @@ import {
 import { DatePicker } from "@mantine/dates";
 import axios from "axios";
 import Swal from "sweetalert2";
+import VerifyEmail from "./VerifyEmail";
 
 // export interface AuthenticationFormProps {
 //   noShadow?: boolean;
@@ -51,7 +52,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       confirmPassword: "",
       dateofbirth: "",
       address: "",
-      phonenumber: "",
+      contactnumber: "",
       termsOfService: true,
     },
 
@@ -64,7 +65,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           value
         ),
-      phonenumber: (value) =>
+      contactnumber: (value) =>
         formType === "login" ||
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
       confirmPassword: (val, value) =>
@@ -74,7 +75,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
 
     errorMessages: {
       email: "Invalid email",
-      phonenumber: "Invalid Phonenumber",
+      contactnumber: "Invalid Phonenumber",
       pswrd:
         "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
       confirmPassword: "Passwords don't match. Try again",
@@ -101,10 +102,15 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
         password: values.pswrd,
         address: values.address,
         date_of_birth: values.dateofbirth,
-        contact_number: values.phonenumber,
+        contact_number: values.contactnumber,
       })
         .then((res) => {
           setLoading(false);
+          Swal.fire(
+            "Account Created?",
+            "You can go to login page to access your account",
+            "success"
+          );
           console.log("created", res);
         })
         .catch((err) => {
@@ -127,11 +133,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
         })
         .catch((err) => {
           // console.err("error", err);
-          Swal.fire(
-            "Login Failed?",
-            "Email or Password already exists",
-            "error"
-          );
+          Swal.fire("Login Failed?", "Incorrect Email or Password ", "error");
         });
     }
   };
@@ -228,7 +230,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
                 placeholder="Contact Number"
                 label="Contact Number"
                 icon={<ChatBubbleIcon />}
-                {...form.getInputProps("phonenumber")}
+                {...form.getInputProps("contactnumber")}
               />
             )}
             {formType === "register" && (
