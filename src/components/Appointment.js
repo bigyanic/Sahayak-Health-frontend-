@@ -161,10 +161,10 @@ function Appointment() {
                 mt="md"
                 required
                 data={[
-                  { value: "male", label: "Male" },
-                  { value: "female", label: "Female" },
-                  { value: "both", label: "Both" },
-                  { value: "none", label: "None" },
+                  { value: "one", label: "Gandaki Regional Hospital" },
+                  { value: "two", label: "Manipal Teaching Hospital" },
+                  { value: "three", label: "" },
+                  { value: "four", label: "None" },
                 ]}
               />
             </Grid.Col>
@@ -175,10 +175,10 @@ function Appointment() {
                 mt="md"
                 required
                 data={[
-                  { value: "male", label: "Male" },
-                  { value: "female", label: "Female" },
-                  { value: "both", label: "Both" },
-                  { value: "none", label: "None" },
+                  { value: "ent", label: "ENT" },
+                  { value: "mental", label: "Mental" },
+                  { value: "general", label: "General" },
+                  { value: "childdisease", label: "Chlid Disease" },
                 ]}
               />
             </Grid.Col>
@@ -189,10 +189,10 @@ function Appointment() {
                 mt="md"
                 required
                 data={[
-                  { value: "male", label: "Male" },
-                  { value: "female", label: "Female" },
-                  { value: "both", label: "Both" },
-                  { value: "none", label: "None" },
+                  { value: "male", label: "Makka Madina" },
+                  { value: "female", label: "Bigyan Prasad" },
+                  { value: "both", label: "Bishab Kumar" },
+                  { value: "none", label: "Gannu Kaka" },
                 ]}
               />
             </Grid.Col>
