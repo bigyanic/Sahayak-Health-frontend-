@@ -14,6 +14,7 @@ import Myths from "./Myths";
 // import Uploader from "./DropZone";
 import NavBarRouter from "./NavBarRouter";
 import Appointment from "./Appointment";
+import ImageSlider from "./Homepage/ImageSlider";
 
 const AppBody = () => {
   return (
@@ -36,6 +37,7 @@ const AppBody = () => {
         <Route path="viz" element={<ListTabs />} />
         <Route path="hospitals" element={<HospitalList />} />
         <Route path="createuser" element={<AuthenticationForm />} />
+        <Route path="imgslide" element={<ImageSlider />} />
       </Routes>
     </AppShell>
   );
