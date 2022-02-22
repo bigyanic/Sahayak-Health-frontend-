@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@mantine/core": "^3.6.8",
+    "@mantine/core": "^3.6.9",
     "@mantine/dates": "^3.6.8",
     "@mantine/dropzone": "^3.6.8",
     "@mantine/hooks": "^3.6.9",
+    "@mantine/notifications": "^3.6.9",
     "@modulz/radix-icons": "^4.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
