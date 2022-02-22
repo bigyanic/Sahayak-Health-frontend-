@@ -3,6 +3,7 @@ import { useLocalStorageValue } from "@mantine/hooks";
 import { React } from "react";
 import Chatbot from "./components/Chatbot";
 import AppBody from "./components/AppBody";
+import { NotificationsProvider } from "@mantine/notifications";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorageValue({
@@ -20,8 +21,10 @@ function App() {
         theme={{ colorScheme, fontFamily: "Poppins" }}
         withGlobalStyles
       >
-        <AppBody />
-        <Chatbot />
+        <NotificationsProvider>
+          <AppBody />
+          <Chatbot />
+        </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );
