@@ -16,10 +16,12 @@ import {
   Paper,
   Card,
   Text,
+  ScrollArea,
   LoadingOverlay,
   Anchor,
   useMantineTheme,
 } from "@mantine/core";
+import { useNotifications } from "@mantine/notifications";
 import { DatePicker } from "@mantine/dates";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -37,7 +39,7 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const theme = useMantineTheme();
-
+  const notifications = useNotifications();
   const toggleFormType = () => {
     setFormType((current) => (current === "register" ? "login" : "register"));
     setError(null);
@@ -106,19 +108,18 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
       })
         .then((res) => {
           setLoading(false);
-          Swal.fire(
-            "Account Created?",
-            "You can go to login page to access your account",
-            "success"
-          );
+          notifications.showNotification({
+            title: "Account Created",
+            message: "You can login to your account now",
+          });
           console.log("created", res);
         })
         .catch((err) => {
-          Swal.fire(
-            "Accouunt creation failed",
-            "User with same email already exist",
-            "error"
-          );
+          notifications.showNotification({
+            title: "Account Creation Failed",
+            color: "red",
+            message: "Maybe you already have an account, use different email",
+          });
           console.error(err);
         });
     } else {
@@ -133,143 +134,158 @@ export function AuthenticationForm({ noShadow, noPadding, noSubmit, style }) {
         })
         .catch((err) => {
           // console.err("error", err);
-          Swal.fire("Login Failed?", "Incorrect Email or Password ", "error");
+          notifications.showNotification({
+            title: "Login Failed",
+            color: "red",
+            message: "Incorrect Email or Password🤥",
+          });
         });
     }
   };
 
   return (
-    <div style={{ width: 500, margin: "auto" }}>
-      <Card shadow="sm" padding="lg">
-        <Paper
-          padding={noPadding ? 0 : "lg"}
-          shadow={noShadow ? null : "sm"}
-          style={{
-            position: "relative",
-            backgroundColor:
-              theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-            ...style,
-          }}
-        >
-          <form onSubmit={form.onSubmit(handleSubmit)}>
-            {formType === "register" && (
-              <Group grow>
-                <TextInput
-                  data-autofocus
-                  required
-                  placeholder="Your first name"
-                  label="First name"
-                  {...form.getInputProps("firstName")}
-                />
+    <>
+      <ScrollArea
+        style={{ height: "82vh", overflowX: "hidden" }}
+        offsetScrollbars
+      >
+        <div style={{ width: 500, margin: "auto" }}>
+          <Card shadow="sm" padding="lg">
+            <Paper
+              padding={noPadding ? 0 : "lg"}
+              shadow={noShadow ? null : "sm"}
+              style={{
+                position: "relative",
+                backgroundColor:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.dark[7]
+                    : theme.white,
+                ...style,
+              }}
+            >
+              <form onSubmit={form.onSubmit(handleSubmit)}>
+                {formType === "register" && (
+                  <Group grow>
+                    <TextInput
+                      data-autofocus
+                      required
+                      placeholder="Your first name"
+                      label="First name"
+                      {...form.getInputProps("firstName")}
+                    />
 
-                <TextInput
-                  required
-                  placeholder="Your last name"
-                  label="Last name"
-                  {...form.getInputProps("lastName")}
-                />
-              </Group>
-            )}
-            {(formType === "register" || formType === "login") && (
-              <TextInput
-                mt="md"
-                required
-                placeholder="Your email"
-                label="Email"
-                icon={<EnvelopeClosedIcon />}
-                {...form.getInputProps("email")}
-              />
-            )}
-            {(formType === "register" || formType === "login") && (
-              <PasswordInput
-                mt="md"
-                required
-                placeholder="Password"
-                label="Password"
-                icon={<LockClosedIcon />}
-                onFocus={() => {
-                  form.validateField("pswrd");
-                }}
-                {...form.getInputProps("pswrd")}
-              />
-            )}
-            {formType === "register" && (
-              <PasswordInput
-                mt="md"
-                required
-                label="Confirm Password"
-                placeholder="Confirm password"
-                icon={<LockClosedIcon />}
-                {...form.getInputProps("confirmPassword")}
-              />
-            )}
-            {formType === "register" && (
-              <TextInput
-                mt="md"
-                required
-                placeholder="Address"
-                label="Address"
-                icon={<EnvelopeClosedIcon />}
-                {...form.getInputProps("address")}
-              />
-            )}
-            {formType === "register" && (
-              <DatePicker
-                mt="md"
-                placeholder="Pick date"
-                icon={<CalendarIcon />}
-                label="Date of Birth"
-                required
-                {...form.getInputProps("dateofbirth")}
-              />
-            )}
-            {formType === "register" && (
-              <TextInput
-                mt="md"
-                required
-                placeholder="Contact Number"
-                label="Contact Number"
-                icon={<ChatBubbleIcon />}
-                {...form.getInputProps("contactnumber")}
-              />
-            )}
-            {formType === "register" && (
-              <Checkbox
-                mt="xl"
-                label="I agree to sell my soul and privacy to this corporation"
-                onFocus={() => {
-                  form.validateField("termsOfService");
-                }}
-                {...form.getInputProps("termsOfService", { type: "checkbox" })}
-              />
-            )}
-            {error && (
-              <Text color="red" size="sm" mt="sm">
-                {error}
-              </Text>
-            )}
-            {!noSubmit && (
-              <Group position="apart" mt="xl">
-                <Anchor
-                  component="button"
-                  type="button"
-                  color="gray"
-                  onClick={toggleFormType}
-                  size="sm"
-                >
-                  {formType === "register"
-                    ? "Have an account? Login"
-                    : "Don't have an account? Register"}
-                </Anchor>
+                    <TextInput
+                      required
+                      placeholder="Your last name"
+                      label="Last name"
+                      {...form.getInputProps("lastName")}
+                    />
+                  </Group>
+                )}
+                {(formType === "register" || formType === "login") && (
+                  <TextInput
+                    mt="md"
+                    required
+                    placeholder="Your email"
+                    label="Email"
+                    icon={<EnvelopeClosedIcon />}
+                    {...form.getInputProps("email")}
+                  />
+                )}
+                {(formType === "register" || formType === "login") && (
+                  <PasswordInput
+                    mt="md"
+                    required
+                    placeholder="Password"
+                    label="Password"
+                    icon={<LockClosedIcon />}
+                    onFocus={() => {
+                      form.validateField("pswrd");
+                    }}
+                    {...form.getInputProps("pswrd")}
+                  />
+                )}
+                {formType === "register" && (
+                  <PasswordInput
+                    mt="md"
+                    required
+                    label="Confirm Password"
+                    placeholder="Confirm password"
+                    icon={<LockClosedIcon />}
+                    {...form.getInputProps("confirmPassword")}
+                  />
+                )}
+                {formType === "register" && (
+                  <TextInput
+                    mt="md"
+                    required
+                    placeholder="Address"
+                    label="Address"
+                    icon={<EnvelopeClosedIcon />}
+                    {...form.getInputProps("address")}
+                  />
+                )}
+                {formType === "register" && (
+                  <DatePicker
+                    mt="md"
+                    placeholder="Pick date"
+                    icon={<CalendarIcon />}
+                    label="Date of Birth"
+                    required
+                    {...form.getInputProps("dateofbirth")}
+                  />
+                )}
+                {formType === "register" && (
+                  <TextInput
+                    mt="md"
+                    required
+                    placeholder="Contact Number"
+                    label="Contact Number"
+                    icon={<ChatBubbleIcon />}
+                    {...form.getInputProps("contactnumber")}
+                  />
+                )}
+                {formType === "register" && (
+                  <Checkbox
+                    mt="xl"
+                    label="I agree to sell my soul and privacy to this corporation"
+                    onFocus={() => {
+                      form.validateField("termsOfService");
+                    }}
+                    {...form.getInputProps("termsOfService", {
+                      type: "checkbox",
+                    })}
+                  />
+                )}
+                {error && (
+                  <Text color="red" size="sm" mt="sm">
+                    {error}
+                  </Text>
+                )}
+                {!noSubmit && (
+                  <Group position="apart" mt="xl">
+                    <Anchor
+                      component="button"
+                      type="button"
+                      color="gray"
+                      onClick={toggleFormType}
+                      size="sm"
+                    >
+                      {formType === "register"
+                        ? "Have an account? Login"
+                        : "Don't have an account? Register"}
+                    </Anchor>
 
-                <Button color="blue" type="submit">
-                  {formType === "register" ? "Register" : "Login"}
-                </Button>
-              </Group>
-            )}
-          </form>
-        </Paper>
-      </Card>
-    </div>
+                    <Button color="blue" type="submit">
+                      {formType === "register" ? "Register" : "Login"}
+                    </Button>
+                  </Group>
+                )}
+              </form>
+            </Paper>
+          </Card>
+        </div>
+      </ScrollArea>
+    </>
   );
 }
