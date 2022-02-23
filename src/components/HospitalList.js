@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Table, useMantineTheme } from "@mantine/core";
+import { Table, useMantineTheme, ScrollArea } from "@mantine/core";
 import axios from "axios";
 function HospitalList() {
   const theme = useMantineTheme();
@@ -33,20 +33,27 @@ function HospitalList() {
     );
   });
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Phone</th>
-          <th>Contact Person</th>
-          <th>Conttact Person Number</th>
-          <th>Beds</th>
-          <th>Ventilators</th>
-        </tr>
-      </thead>
-      <tbody>{arr}</tbody>
-    </Table>
+    <>
+      <ScrollArea
+        style={{ height: "82vh", overflowX: "hidden" }}
+        offsetScrollbars
+      >
+        <Table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Contact Person</th>
+              <th>Conttact Person Number</th>
+              <th>Beds</th>
+              <th>Ventilators</th>
+            </tr>
+          </thead>
+          <tbody>{arr}</tbody>
+        </Table>
+      </ScrollArea>
+    </>
   );
 }
 

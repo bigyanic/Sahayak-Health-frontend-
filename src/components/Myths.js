@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { Accordion } from "@mantine/core";
 import axios from "axios";
-import { Title, Space, useMantineTheme } from "@mantine/core";
+import { Title, Space, useMantineTheme, ScrollArea } from "@mantine/core";
 
 function Faq() {
   const theme = useMantineTheme();
@@ -31,9 +31,14 @@ function Faq() {
 
   return (
     <div>
-      <Title order={1}>Myths About Covid-19</Title>
-      <Space h="xl" />
-      {arr}
+      <ScrollArea
+        style={{ height: "82vh", overflowX: "hidden" }}
+        offsetScrollbars
+      >
+        <Title order={1}>Myths About Covid-19</Title>
+        <Space h="xl" />
+        {arr}
+      </ScrollArea>
     </div>
   );
 }
