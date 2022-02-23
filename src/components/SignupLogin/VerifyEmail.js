@@ -1,21 +1,23 @@
-import React from "react";
-import { Title, Card, Text, Input, Space } from "@mantine/core";
+import { TextInput, Text, Button } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 
 function VerifyEmail() {
-  return (
-    <div style={{ width: 500, margin: "auto" }}>
-      <Card shadow="sm" padding="lg">
-        <Title order={1}>Verify Your Email</Title>
-        <Space h="xl" />
-        <Text size="md">
-          Please check your email for your verification code and enter it below
-          to confirm your email address.{" "}
-        </Text>
-        <Space h="xl" />
-        <Input placeholder="Verification Code" />
-      </Card>
-    </div>
-  );
-}
+  const modals = useModals();
 
+  const openContentModal = () => {
+    const id = modals.openModal({
+      title: "Subscribe to newsletter",
+      children: (
+        <>
+          <TextInput label="Your email" />
+          <Button fullWidth onClick={() => modals.closeModal(id)}>
+            Submit
+          </Button>
+        </>
+      ),
+    });
+  };
+
+  return <Button onClick={openContentModal}>Open content modal</Button>;
+}
 export default VerifyEmail;

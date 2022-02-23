@@ -29,6 +29,7 @@ function HospitalList() {
         <td>{data.contact_person_number}</td>
         <td>{data.capacity.beds}</td>
         <td>{data.capacity.ventilators}</td>
+        
       </tr>
     );
   });

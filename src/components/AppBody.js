@@ -15,6 +15,7 @@ import Myths from "./Myths";
 import NavBarRouter from "./NavBarRouter";
 import Appointment from "./Appointment";
 import ImageSlider from "./Homepage/ImageSlider";
+import VerifyEmail from "./SignupLogin/VerifyEmail";
 
 const AppBody = () => {
   return (
@@ -38,6 +39,7 @@ const AppBody = () => {
         <Route path="hospitals" element={<HospitalList />} />
         <Route path="createuser" element={<AuthenticationForm />} />
         <Route path="imgslide" element={<ImageSlider />} />
+        <Route path="verifyemail" element={<VerifyEmail />} />
       </Routes>
     </AppShell>
   );

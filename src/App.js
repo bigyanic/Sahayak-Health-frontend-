@@ -5,6 +5,8 @@ import Chatbot from "./components/Chatbot";
 import AppBody from "./components/AppBody";
 import { NotificationsProvider } from "@mantine/notifications";
 
+import { ModalsProvider } from "@mantine/modals";
+
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorageValue({
     key: "color-scheme",
@@ -22,8 +24,10 @@ function App() {
         withGlobalStyles
       >
         <NotificationsProvider>
-          <AppBody />
-          <Chatbot />
+          <ModalsProvider>
+            <AppBody />
+            <Chatbot />
+          </ModalsProvider>
         </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
