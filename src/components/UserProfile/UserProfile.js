@@ -1,9 +1,10 @@
 import React from "react";
 import {
   Card,
+  Avatar,
   Image,
   Text,
-  Badge,
+  Grid,
   Button,
   Group,
   useMantineTheme,
@@ -15,8 +16,13 @@ function MainProfile() {
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
   return (
-    <div style={{ width: 340, margin: "auto" }}>
-      <Card shadow="sm" padding="lg"></Card>
+    <div style={{ margin: "auto" }}>
+      <Card shadow="sm" padding="lg">
+        <Grid grow>
+          <Grid.Col span={4}>1</Grid.Col>
+          <Grid.Col span={4}>2</Grid.Col>
+        </Grid>
+      </Card>
     </div>
   );
 }

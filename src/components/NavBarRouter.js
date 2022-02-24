@@ -14,6 +14,8 @@ import {
 import { useNavigate, useLocation } from "react-router";
 import { useViewportSize } from "@mantine/hooks";
 import TABS from "./TabData";
+import { ChevronRightIcon } from "@modulz/radix-icons";
+import UserProfileButton from "./UserProfile/UserProfileButton";
 
 const NavBarRouter = () => {
   const navigate = new useNavigate();
@@ -28,18 +30,18 @@ const NavBarRouter = () => {
     setActiveTab(active);
   };
 
-  const onClickHandler = () => {
-    navigate(`/createuser`);
-  };
+  // const onClickHandler = () => {
+  //   navigate(`/createuser`);
+  // };
 
   return (
-    <Navbar padding="md" width={{ base: 250 }} height={height - 60}>
+    <Navbar padding="md" width={{ base: 270 }} height={height - 60}>
       <Navbar.Section
         grow
         component={ScrollArea}
         ml={-10}
         mr={-10}
-        sx={{ paddingLeft: 10, paddingRight: 10 }}
+        sx={{ paddingLeft: 5, paddingRight: 5 }}
       >
         <Tabs
           variant="pills"
@@ -55,19 +57,7 @@ const NavBarRouter = () => {
 
       <Navbar.Section>
         <Paper padding="xs" withBorder>
-          <UnstyledButton variant="filled" onClick={onClickHandler}>
-            <Group>
-              <Avatar size={40} color="blue">
-                SH
-              </Avatar>
-              <div>
-                <Text>Sahayak Health</Text>
-                <Text size="xs" color="gray">
-                  Login & Signup
-                </Text>
-              </div>
-            </Group>
-          </UnstyledButton>
+          <UserProfileButton />
         </Paper>
       </Navbar.Section>
     </Navbar>
