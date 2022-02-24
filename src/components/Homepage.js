@@ -5,10 +5,11 @@ import {
   Badge,
   Button,
   Group,
-  Grid,
+  Paper,
   Space,
   useMantineTheme,
 } from "@mantine/core";
+import TopName from "./Homepage/TopName";
 import WhySahayak from "./Homepage/WhySahayak";
 
 function Homepage() {
@@ -27,10 +28,14 @@ function Homepage() {
       >
         <div style={{ margin: "auto" }}>
           <Card shadow="sm" padding="xl">
-            <Blockquote cite="– Forrest Gump">
-              Life is like an npm install – you never know what you are going to
-              get.
-            </Blockquote>
+            <TopName />
+            <Space h="xl" />
+            <Paper padding="sm" shadow="xs">
+              <Blockquote cite="– Forrest Gump">
+                Life is like an npm install – you never know what you are going
+                to get.
+              </Blockquote>
+            </Paper>
             <Space h="xl" />
 
             <WhySahayak />

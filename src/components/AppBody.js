@@ -16,6 +16,7 @@ import NavBarRouter from "./NavBarRouter";
 import Appointment from "./Appointment";
 import ImageSlider from "./Homepage/ImageSlider";
 import VerifyEmail from "./SignupLogin/VerifyEmail";
+import UserProfile from "./UserProfile/UserProfile";
 
 const AppBody = () => {
   return (
@@ -40,6 +41,7 @@ const AppBody = () => {
         <Route path="createuser" element={<AuthenticationForm />} />
         <Route path="imgslide" element={<ImageSlider />} />
         <Route path="verifyemail" element={<VerifyEmail />} />
+        <Route path="userprofile" element={<UserProfile />} />
       </Routes>
     </AppShell>
   );
