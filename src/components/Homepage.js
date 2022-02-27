@@ -1,7 +1,7 @@
 import {
   Card,
   Blockquote,
-  Text,
+  ScrollArea,
   Badge,
   Button,
   Group,
@@ -20,28 +20,33 @@ function Homepage() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
+      <ScrollArea
+        style={{ height: "82vh", overflowX: "hidden" }}
+        offsetScrollbars
       >
-        <div style={{ margin: "auto" }}>
-          <Card shadow="sm" padding="xl">
-            <TopName />
-            <Space h="xl" />
-            <Paper padding="sm" shadow="xs">
-              <Blockquote cite="– Forrest Gump">
-                Life is like an npm install – you never know what you are going
-                to get.
-              </Blockquote>
-            </Paper>
-            <Space h="xl" />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <div style={{ margin: "auto" }}>
+            <Card shadow="sm" padding="xl">
+              <TopName />
+              <Space h="xl" />
+              <Paper padding="sm" shadow="xs">
+                <Blockquote cite="– Forrest Gump">
+                  Life is like an npm install – you never know what you are
+                  going to get.
+                </Blockquote>
+              </Paper>
+              <Space h="xl" />
 
-            <WhySahayak />
-          </Card>
+              <WhySahayak />
+            </Card>
+          </div>
         </div>
-      </div>
+      </ScrollArea>
     </>
   );
 }

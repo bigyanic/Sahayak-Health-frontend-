@@ -35,7 +35,7 @@ const NavBarRouter = () => {
   // };
 
   return (
-    <Navbar padding="md" width={{ base: 270 }} height={height - 60}>
+    <Navbar padding="md" width={{ base: 280 }} height={height - 60}>
       <Navbar.Section
         grow
         component={ScrollArea}

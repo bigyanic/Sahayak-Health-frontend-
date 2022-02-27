@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Tabs,
-  Navbar,
-  UnstyledButton,
-  Group,
-  Paper,
-  ScrollArea,
-  Avatar,
-  ActionIcon,
-  Space,
-  Text,
-} from "@mantine/core";
+import { UnstyledButton, Group, Avatar, Text } from "@mantine/core";
 import { useNavigate, useLocation } from "react-router";
 import { ChevronRightIcon } from "@modulz/radix-icons";
 
