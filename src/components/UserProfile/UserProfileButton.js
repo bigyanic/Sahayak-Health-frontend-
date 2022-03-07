@@ -7,7 +7,7 @@ function UserProfileButton() {
   const navigate = new useNavigate();
   const location = useLocation().pathname;
   const onClickHandler = () => {
-    navigate(`/createuser`);
+    navigate(`/signupas`);
   };
 
   return (

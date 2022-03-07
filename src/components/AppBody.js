@@ -18,6 +18,7 @@ import ImageSlider from "./Homepage/ImageSlider";
 import VerifyEmail from "./SignupLogin/VerifyEmail";
 import UserProfile from "./UserProfile/UserProfile";
 import UserButton from "./UserProfile/UserProfileButton";
+import SignupAs from './SignupLogin/SignupAs';
 
 const AppBody = () => {
   return (
@@ -43,6 +44,7 @@ const AppBody = () => {
         <Route path="imgslide" element={<ImageSlider />} />
         <Route path="verifyemail" element={<VerifyEmail />} />
         <Route path="userprofile" element={<UserProfile />} />
+        <Route path="signupas" element={<SignupAs />} />
         {/* <Route path="button" element={<UserProfileButton />} /> */}
       </Routes>
     </AppShell>
