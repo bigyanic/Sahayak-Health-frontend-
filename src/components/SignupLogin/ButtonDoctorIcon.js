@@ -7,7 +7,7 @@ function ButtonDoctorIcon() {
     const navigate = new useNavigate();
   const location = useLocation().pathname;
   const onClickHandler = () => {
-    navigate(`/createuser`);
+    navigate(`/createdoctor`);
   };
   return (
     <div align="left">
