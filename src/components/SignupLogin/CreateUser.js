@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import { useForm } from "@mantine/hooks";
+import { useModals } from "@mantine/modals";
+
 import {
   EnvelopeClosedIcon,
   LockClosedIcon,
   ChatBubbleIcon,
   CalendarIcon,
 } from "@modulz/radix-icons";
+import { ChevronDown } from 'tabler-icons-react';
 import {
   TextInput,
   PasswordInput,
@@ -17,6 +20,7 @@ import {
   Card,
   Text,
   ScrollArea,
+  NativeSelect,
   LoadingOverlay,
   Anchor,
   useMantineTheme,
@@ -42,10 +46,27 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
   const [error, setError] = useState(null);
   const theme = useMantineTheme();
   const notifications = useNotifications();
+  const modals = useModals();
 
-  const onClickHandler = () => {
-    navigate(`/verifyemail`);
+  // const onClickHandler = () => {
+  //   navigate(`/verifyemail`);
+  // };
+  const openContentModal = () => {
+    const id = modals.openModal({
+      title: "Check your mail and Enter the code",
+      children: (
+        <>
+          <TextInput label="Your Code" />
+          <Button fullWidth onClick={() => modals.closeModal(id)}>
+            Submit
+          </Button>
+        </>
+      ),
+    });
   };
+
+
+
   const toggleFormType = () => {
     setFormType((current) => (current === "register" ? "login" : "register"));
     setError(null);
@@ -59,6 +80,7 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
       pswrd: "",
       confirmPassword: "",
       dateofbirth: "",
+      gender:"",
       address: "",
       contactnumber: "",
       termsOfService: true,
@@ -91,6 +113,8 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
     },
   });
 
+
+
   const handleSubmit = (values) => {
     setLoading(true);
     setError(null);
@@ -103,7 +127,7 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
     //   );
     // }, 3000);
     if (formType === "register") {
-      Axios.post("http://20.41.221.66:7000/postreg/", {
+      Axios.post("http://20.41.221.66:7000/patient/postreg/", {
         first_name: values.firstName,
         last_name: values.lastName,
         email: values.email,
@@ -111,6 +135,7 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
         address: values.address,
         date_of_birth: values.dateofbirth,
         contact_number: values.contactnumber,
+        gender:values.gender,
       })
         .then((res) => {
           setLoading(false);
@@ -118,7 +143,8 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
             title: "Account Created",
             message: "You can login to your account now",
           });
-          return onClickHandler;
+    
+          return openContentModal();
           console.log("created", res);
         })
         .catch((err) => {
@@ -243,6 +269,17 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
                   />
                 )}
                 {formType === "register" && (
+                   <NativeSelect
+                   label="Gender"
+                   placeholder="Your Gender"
+                   data={['Male', 'Female', 'Other']}
+                   rightSection={<ChevronDown size={14} />}
+                   rightSectionWidth={40}
+                   {...form.getInputProps("gender")}
+
+                 />
+                )}
+                {formType === "register" && (
                   <TextInput
                     mt="md"
                     required
@@ -283,7 +320,7 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
                         : "Don't have an account? Register"}
                     </Anchor>
 
-                    <Button color="blue" type="submit">
+                    <Button color="blue" type="submit" >
                       {formType === "register" ? "Register" : "Login"}
                     </Button>
                   </Group>

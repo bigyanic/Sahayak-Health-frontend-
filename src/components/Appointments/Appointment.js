@@ -16,7 +16,7 @@ import {
   HomeIcon,
   ChatBubbleIcon,
 } from "@modulz/radix-icons";
-import Dropzone from "../DropZone";
+import Dropzone from "./DropZone";
 import Axios from "axios";
 
 function Appointment() {

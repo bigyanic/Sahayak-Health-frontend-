@@ -5,7 +5,7 @@ import TextLogo from "./TextLogo";
 function TopName() {
   return (
     <div>
-                  <Space h={90} />
+                  <Space h={40} />
 
       <Text size="xl" weight={700}>
         Welcome To,
@@ -13,7 +13,7 @@ function TopName() {
       <TextLogo />
 
       {/* <Title order={1}>Sahayak Health</Title> */}
-      <Space h={40} />
+      <Space h={10} />
       <p>
         Use it to create cards, dropdowns, modals and other components that
         require background with shadow

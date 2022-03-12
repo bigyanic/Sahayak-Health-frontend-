@@ -18,6 +18,8 @@ function VerifyEmail() {
     });
   };
 
-  return <Button onClick={openContentModal}>Open content modal</Button>;
+  return (
+    {openContentModal}
+  );
 }
 export default VerifyEmail;
