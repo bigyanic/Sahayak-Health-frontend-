@@ -1,4 +1,4 @@
-.rcw-conversation-container > .rcw-header {
+/* .rcw-conversation-container > .rcw-header {
   background-color: rgb(89, 14, 187);
   padding: 2px 0 2px;
   box-shadow: null;
@@ -26,6 +26,3 @@
   color: black;
   background-color: #e7ffee;
 } */
-.rcw-widget-container {
-  color: black;
-}

@@ -8,17 +8,27 @@ const Chatbot = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
+  const buttons = [
+    { label: "Yes", value: "Yes" },
+    { label: "No", value: "No" },
+  ];
+
   useEffect(() => {
     addResponseMessage("Hello");
+
+    setQuickButtons(buttons);
     //
-  }, []);
+  }, [1]);
 
   // const [data, setData] = useState([]);
-  const handleNewUserMessage = async (newMessage, data) => {
+  const handleNewUserMessage = async (newMessage,buttons, data) => {
     console.log(`New message incoming! ${newMessage}`);
-    // Now send the message throught the backend API
+    console.log(`New message incoming! ${buttons}`);
+
+  // Now send the message throught the backend API
     const message = {
-      message: `${newMessage}`,
+      
+      message: `${newMessage}`||`${buttons}`,
     };
     const res = await axios.post(
       "http://20.41.221.66:5005/webhooks/rest/webhook",

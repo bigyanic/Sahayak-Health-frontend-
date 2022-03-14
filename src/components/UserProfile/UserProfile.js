@@ -16,7 +16,7 @@ import {
 import AppointmentList from "./AppointmentList";
 import ProfileImage from "./ProfileImage";
 import UserDetails from "./UserDetails";
-
+import BmiCalculator from "./BmiCalculator";
 function MainProfile() {
   const theme = useMantineTheme();
 
@@ -29,6 +29,7 @@ function MainProfile() {
         offsetScrollbars
       >
         <Paper>
+
           <Grid>
             <Grid.Col span={2}>
               <ProfileImage />
@@ -40,6 +41,7 @@ function MainProfile() {
 
             <AppointmentList />
           </Grid>
+         <BmiCalculator />
         </Paper>
       </ScrollArea>
     </div>

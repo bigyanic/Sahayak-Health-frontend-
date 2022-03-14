@@ -6,6 +6,7 @@
     "@mantine/core": "^3.6.9",
     "@mantine/dates": "^3.6.8",
     "@mantine/dropzone": "^3.6.8",
+    "@mantine/form": "^4.0.4",
     "@mantine/hooks": "^3.6.9",
     "@mantine/modals": "^3.6.9",
     "@mantine/notifications": "^3.6.9",
