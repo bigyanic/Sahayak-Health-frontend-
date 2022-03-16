@@ -29,19 +29,22 @@ function MainProfile() {
         offsetScrollbars
       >
         <Paper>
-
-          <Grid>
-            <Grid.Col span={2}>
-              <ProfileImage />
-            </Grid.Col>
-            <Space w="xl" />
-            <Grid.Col span={5}>
+<Group>
+          <Grid >
+            <Grid.Col span={7}>
+             
+            
               <UserDetails />
-            </Grid.Col>
-
-            <AppointmentList />
+              <BmiCalculator/>
+            </Grid.Col>            
+            <Grid.Col span={4}>
+            
+              <AppointmentList />
+                        </Grid.Col>  
+                        
+                              
           </Grid>
-         <BmiCalculator />
+          </Group>
         </Paper>
       </ScrollArea>
     </div>

@@ -1,77 +1,88 @@
 import {React,useState} from 'react'
-import { Paper,Button,NumberInput,Space,Group,useMantineTheme,Box, Card } from '@mantine/core';
+import { NumberInput, Slider, Button, Group,Title,Space, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
+
 function BmiCalculator() {
-    const theme = useMantineTheme();
 
-  const secondaryColor = theme.colorScheme === 'dark'
-    ? theme.colors.dark[1]
-    : theme.colors.gray[7];
-    
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [bmi, setBmi] = useState(0);
+  const [status, setStatus] = useState("");
+  const [color, setColor] = useState("");
 
 
-    const [height, setHeight] = useState("");
-    const [weight, setWeight] = useState("");  
-    const [bmiResult, setBmiResult] = useState(null);
-      const [status, setStatus] = useState("");
-  
-    function calculateBMI() {
-      let bmi = (weight / (height / 100) ** 2).toFixed(2);
-      setBmiResult(bmi);
+const Calculation=(values)=>{
+  const height = values.height;
+  const weight = values.weight;
+  const bmi = weight / (height /100)**2;
   console.log(bmi);
+  if (bmi < 18.5) {
+    setStatus("Underweight");
+    setColor("red");
 
-      let bmiStatus = getStatus(bmi);
+  } else if (bmi >= 18.5 && bmi < 25) {
+    setStatus("Normal");
+    setColor("blue")
+  } else if (bmi >= 25 && bmi < 30) {
+    setStatus("Overweight");
+    setColor("orange")
+  } else {
+    setStatus("Obese");
+    setColor("red")
+  }
+  setBmi(bmi);
+  console.log(status);
   
-      setStatus(bmiStatus);
-      
-      console.log(bmiStatus);
-  
-      
-    }
-  
-    function getStatus(bmi) {
-      if (bmi < 18.5) return "Underweight";
-      else if (bmi >= 18.5 && bmi < 24.9) return "Normal";
-      else if (bmi >= 25 && bmi < 29.9) return "Overweight";
-      else return "Obese";
-    }
-    
-   
+}
+
+
+
+  const form = useForm({
+    initialValues: {
+      height: '',
+      weight: '',
+    },
+
+  });
+
   return (
     <div>
-    <Paper shadow="xs" p="md">
-    <Box sx={{ maxWidth: 300 }} mx="auto">
+      <Box sx={{ maxWidth: 500 }} mx="auto">
+      <Space h={50} />
       
-      <NumberInput
-      defaultValue={18}
-      placeholder="Your Height"
-      label="Your Height"
-      onChange={(e) => setHeight(e.target.value)}
-
-
+      <Title order={2}>BMI Calculator</Title>
+      <form onSubmit={form.onSubmit(Calculation)}>
+<NumberInput
+      defaultValue={170}
+      placeholder="Your Height(cm)"
+      label="Your Height(cm)"
       required
-    /> 
+      {...form.getInputProps('height')}
+
+    />
     <NumberInput
-    defaultValue={18}
-    placeholder="Your Weight"
-    label="Your Weight"
-    onChange={(e) => setWeight(e.target.value)}
+      defaultValue={70}
+      placeholder="Your Weight(kg)"
+      label="Your Weight(kg)"
+      required
+      {...form.getInputProps('weight')}
 
-
-    required
-  />
-
-<Group position="right" mt="md">
-          <Button type="submit" onClick={calculateBMI}>Submit</Button>
+    />
+    <Group position="right" mt="md">
+          <Button type="submit" >Submit</Button>
         </Group>
-        <Card>
-<h1>Your BMI is {bmiResult}</h1>
+      <Space h="lg" />
 
-        </Card>
-    </Box>
-</Paper>
+</form>
+    <Slider value={bmi} color={color} labelAlwaysOn />
+
+    <p>Your BMI is: {bmi} </p>
+            <p>You are currently: {status}</p>
+            </Box>
+
     </div>
+    
   )
 }
 
