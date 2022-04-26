@@ -58,8 +58,7 @@ const Chatbot = () => {
           return obj;
         });
         console.log({buttonsArr})
-         setQuickButtons(buttonsarray);
-        setButtons(buttonsArr);
+         setQuickButtons(buttonsArr);
       } else {
         setQuickButtons([]);
       }
