@@ -245,7 +245,6 @@ function Appointment() {
                     label="Event date"
                     icon={<Calendar size={16} />}
                     {...form.getInputProps("date")}
-
                   />
                 </Grid.Col>
 

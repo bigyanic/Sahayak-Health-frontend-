@@ -5,7 +5,6 @@ import {
   EnvelopeClosedIcon,
   LockClosedIcon,
   ChatBubbleIcon,
-  CalendarIcon,
   GlobeIcon,
 } from "@modulz/radix-icons";
 import {
@@ -20,26 +19,21 @@ import {
   Card,
   Text,
   ScrollArea,
-  LoadingOverlay,
   Anchor,
   useMantineTheme,
 } from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
-import { DatePicker } from "@mantine/dates";
 import { useNavigate, useLocation } from "react-router";
 
 export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
   const [formType, setFormType] = useState("register");
-  const navigate = new useNavigate();
-  const location = useLocation().pathname;
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const theme = useMantineTheme();
   const notifications = useNotifications();
 
-  const onClickHandler = () => {
-    navigate(`/createdoctorsecondstep`);
-  };
+
   const toggleFormType = () => {
     setFormType((current) => (current === "register" ? "login" : "register"));
     setError(null);
@@ -132,8 +126,8 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
             title: "Account Created",
             message: "You can login to your account now",
           });
-          return onClickHandler;
           console.log("created", res);
+
         })
         .catch((err) => {
           notifications.showNotification({
@@ -292,7 +286,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     {...form.getInputProps("nationality")}
                   />
                 )}
-                //Dropzone Rakhne
+                
                 {formType === "register" && (
                   <NumberInput
                     mt="md"

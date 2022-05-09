@@ -51,21 +51,7 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
   // const onClickHandler = () => {
   //   navigate(`/verifyemail`);
   // };
-  const openContentModal = () => {
-    const id = modals.openModal({
-      title: "Check your mail and Enter the code",
-      children: (
-        <>
-          <TextInput label="Your Code" />
-          <Button fullWidth onClick={() => modals.closeModal(id)}>
-            Submit
-          </Button>
-        </>
-      ),
-    });
-  };
-
-
+  
 
   const toggleFormType = () => {
     setFormType((current) => (current === "register" ? "login" : "register"));
@@ -130,12 +116,13 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
       Axios.post("http://20.41.221.66:7000/patient/postreg/", {
         first_name: values.firstName,
         last_name: values.lastName,
+        gender:values.gender,
         email: values.email,
         password: values.pswrd,
         address: values.address,
         date_of_birth: values.dateofbirth,
         contact_number: values.contactnumber,
-        gender:values.gender,
+        
       })
         .then((res) => {
           setLoading(false);
@@ -143,9 +130,8 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
             title: "Account Created",
             message: "You can login to your account now",
           });
-    
-          return openContentModal();
           console.log("created", res);
+
         })
         .catch((err) => {
           notifications.showNotification({
