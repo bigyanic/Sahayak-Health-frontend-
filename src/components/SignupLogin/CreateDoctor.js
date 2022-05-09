@@ -6,14 +6,17 @@ import {
   LockClosedIcon,
   ChatBubbleIcon,
   CalendarIcon,
+  GlobeIcon,
 } from "@modulz/radix-icons";
 import {
   TextInput,
   PasswordInput,
+  NumberInput,
   Group,
   Checkbox,
   Button,
   Paper,
+  Select,
   Card,
   Text,
   ScrollArea,
@@ -35,7 +38,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
   const notifications = useNotifications();
 
   const onClickHandler = () => {
-    navigate(`/verifyemail`);
+    navigate(`/createdoctorsecondstep`);
   };
   const toggleFormType = () => {
     setFormType((current) => (current === "register" ? "login" : "register"));
@@ -44,14 +47,24 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
 
   const form = useForm({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
+      age: "",
+      gender: "",
       email: "",
-      pswrd: "",
-      confirmPassword: "",
-      dateofbirth: "",
+      password: "",
+      confirmpassword: "",
       address: "",
-      contactnumber: "",
+      contact_number: "",
+      nationality: "",
+      highest_qualification: "",
+      working_hospital: "",
+      license_proof: "",
+      experience_years: "",
+      home_visit_availability: "",
+      stay_location: "",
+      marital_status: "",
+      working_days: "",
       termsOfService: true,
     },
 
@@ -60,14 +73,14 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
       lastName: (value) => formType === "login" || value.trim().length >= 2,
       email: (value) =>
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value),
-      pswrd: (value) =>
+      password: (value) =>
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
           value
         ),
-      contactnumber: (value) =>
+      contact_number: (value) =>
         formType === "login" ||
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
-      confirmPassword: (val, value) =>
+      confirmpassword: (val, value) =>
         formType === "login" || val === value.pswrd,
       termsOfService: (value) => formType === "login" || /^(true)$/.test(value),
     },
@@ -75,9 +88,9 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
     errorMessages: {
       email: "Invalid email",
       contactnumber: "Invalid Phonenumber",
-      pswrd:
+      password:
         "Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-      confirmPassword: "Passwords don't match. Try again",
+      confirmpassword: "Passwords don't match. Try again",
       termsOfService: "You must accept our terms",
     },
   });
@@ -94,14 +107,24 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
     //   );
     // }, 3000);
     if (formType === "register") {
-      Axios.post("http://20.41.221.66:7000/postreg/", {
-        first_name: values.firstName,
-        last_name: values.lastName,
+      Axios.post("http://20.41.221.66:7000/doctor/postreg", {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        age: values.age,
+        gender: values.gender,
         email: values.email,
-        password: values.pswrd,
+        password: values.password,
         address: values.address,
-        date_of_birth: values.dateofbirth,
-        contact_number: values.contactnumber,
+        contact_number: values.contact_number,
+        nationality: values.nationality,
+        highest_qualification: values.highest_qualification,
+        working_hospital: values.working_days,
+        license_proof: values.license_proof,
+        experience_years: values.experience_years,
+        home_visit_availability: values.home_visit_availability,
+        stay_location: values.stay_location,
+        marital_status: values.marital_status,
+        working_days: values.working_days,
       })
         .then((res) => {
           setLoading(false);
@@ -124,7 +147,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
       // console.log("loginpage");
       Axios.post("http://20.41.221.66:7000/userlogin/", {
         email: values.email,
-        password: values.pswrd,
+        password: values.password,
       })
         .then((res) => {
           // setLoading(false);
@@ -169,14 +192,40 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                       required
                       placeholder="Your first name"
                       label="First name"
-                      {...form.getInputProps("firstName")}
+                      {...form.getInputProps("first_name")}
                     />
 
                     <TextInput
                       required
                       placeholder="Your last name"
                       label="Last name"
-                      {...form.getInputProps("lastName")}
+                      {...form.getInputProps("last_name")}
+                    />
+                  </Group>
+                )}
+                {formType === "register" && (
+                  <Group grow>
+                    <NumberInput
+                      mt="md"
+                      defaultValue={18}
+                      placeholder="Your age"
+                      label="Your age"
+                      {...form.getInputProps("age")}
+                      required
+                    />
+
+                    <Select
+                      placeholder="Select One"
+                      label="Gender"
+                      mt="md"
+                      required
+                      data={[
+                        { value: "Male", label: "Male" },
+                        { value: "Female", label: "Female" },
+                        { value: "Both", label: "Both" },
+                        { value: "None", label: "None" },
+                      ]}
+                      {...form.getInputProps("gender")}
                     />
                   </Group>
                 )}
@@ -198,9 +247,9 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     label="Password"
                     icon={<LockClosedIcon />}
                     onFocus={() => {
-                      form.validateField("pswrd");
+                      form.validateField("password");
                     }}
-                    {...form.getInputProps("pswrd")}
+                    {...form.getInputProps("passowrd")}
                   />
                 )}
                 {formType === "register" && (
@@ -210,7 +259,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     label="Confirm Password"
                     placeholder="Confirm password"
                     icon={<LockClosedIcon />}
-                    {...form.getInputProps("confirmPassword")}
+                    {...form.getInputProps("confirm_password")}
                   />
                 )}
                 {formType === "register" && (
@@ -224,23 +273,81 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                   />
                 )}
                 {formType === "register" && (
-                  <DatePicker
-                    mt="md"
-                    placeholder="Pick date"
-                    icon={<CalendarIcon />}
-                    label="Date of Birth"
-                    required
-                    {...form.getInputProps("dateofbirth")}
-                  />
-                )}
-                {formType === "register" && (
                   <TextInput
                     mt="md"
                     required
                     placeholder="Contact Number"
                     label="Contact Number"
                     icon={<ChatBubbleIcon />}
-                    {...form.getInputProps("contactnumber")}
+                    {...form.getInputProps("contact_number")}
+                  />
+                )}
+                {formType === "register" && (
+                  <TextInput
+                    mt="md"
+                    required
+                    placeholder="Nationality"
+                    label="Nationality"
+                    icon={<GlobeIcon />}
+                    {...form.getInputProps("nationality")}
+                  />
+                )}
+                //Dropzone Rakhne
+                {formType === "register" && (
+                  <NumberInput
+                    mt="md"
+                    defaultValue={5}
+                    placeholder="Experience (Years)"
+                    label="Experience"
+                    {...form.getInputProps("experience_years")}
+                    required
+                  />
+                )}
+                {formType === "register" && (
+                  <Select
+                    placeholder="Select One"
+                    label="Home Visit Availability"
+                    mt="md"
+                    required
+                    data={[
+                      { value: "true", label: "Yes" },
+                      { value: "false", label: "No" },
+                    ]}
+                    {...form.getInputProps("home_visit_availablity")}
+                  />
+                )}
+                {formType === "register" && (
+                  <TextInput
+                    mt="md"
+                    required
+                    placeholder="Stay Location"
+                    label="Stay Location"
+                    icon={<GlobeIcon />}
+                    {...form.getInputProps("stay_location")}
+                  />
+                )}
+                {formType === "register" && (
+                  <Select
+                    placeholder="Select One"
+                    label="Marital Status"
+                    mt="md"
+                    required
+                    data={[
+                      { value: "Married", label: "Married" },
+                      { value: "Unmarried", label: "Unmarried" },
+                      { value: "Divorced", label: "Divorced" },
+                    ]}
+                    {...form.getInputProps("marital_status")}
+                  />
+                )}
+                 {formType === "register" && (
+                  <TextInput
+                    mt="md"
+                    required
+                    placeholder="Working Days"
+                    label="Working Days"
+                    icon={<GlobeIcon />}
+                    {...form.getInputProps("working_days")}
                   />
                 )}
                 {formType === "register" && (
@@ -275,7 +382,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     </Anchor>
 
                     <Button color="blue" type="submit">
-                      {formType === "register" ? "Register" : "Login"}
+                      {formType === "register" ? "Next" : "Login"}
                     </Button>
                   </Group>
                 )}

@@ -4,6 +4,7 @@ import {
   Space,
   Title,
   Select,
+  Button,
   TextInput,
   useMantineTheme,
   NumberInput,
@@ -16,6 +17,13 @@ import {
   HomeIcon,
   ChatBubbleIcon,
 } from "@modulz/radix-icons";
+import { Calendar, Clock } from "tabler-icons-react";
+
+import { useNotifications } from "@mantine/notifications";
+import { DatePicker, TimeInput } from "@mantine/dates";
+
+import { useNavigate, useLocation } from "react-router";
+
 import Dropzone from "./DropZone";
 import Axios from "axios";
 
@@ -24,36 +32,77 @@ function Appointment() {
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const notifications = useNotifications();
+  const navigate = new useNavigate();
+
   const form = useForm({
     initialValues: {
-      firstName: "",
-      lastName: "",
-
+      firstname: "",
+      lastname: "",
       age: 23,
-      email: "",
-      address: "",
-      phonenumber: "",
-      termsOfService: true,
+      patient_email: "",
+      patient_address: "",
+      gender: "",
+      contact_number: "",
+      hospital: "",
+      department: "",
+      date: "",
+      time: "",
+      previous_reports: "",
     },
 
     validationRules: {
-      firstName: (value) => value.trim().length >= 2,
-      lastName: (value) => value.trim().length >= 2,
-      email: (value) =>
+      firstname: (value) => value.trim().length >= 2,
+      lastname: (value) => value.trim().length >= 2,
+      patient_email: (value) =>
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value),
 
-      phonenumber: (value) =>
+      contact_number: (value) =>
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
-
-      termsOfService: (value) => /^(true)$/.test(value),
     },
 
     errorMessages: {
-      email: "Invalid email",
-      phonenumber: "Invalid Phonenumber",
-      termsOfService: "You must accept our terms",
+      patient_email: "Invalid email",
+      contact_number: "Invalid Phonenumber",
     },
   });
+  const handleSubmit = (values) => {
+    setLoading(true);
+
+    setError(null);
+    Axios.post("http://20.41.221.66:7000/patient/postapp/", {
+      firstname: values.firstname,
+      lastname: values.lastname,
+      age: values.age,
+      patient_email: values.patient_email,
+      patient_address: values.patient_address,
+      gender: values.gender,
+      contact_number: values.contact_number,
+      hospital: values.hospital,
+      department: values.department,
+      date: values.date,
+      time: values.time,
+      previous_reports: values.previous_reports,
+    })
+      .then((res) => {
+        setLoading(false);
+        notifications.showNotification({
+          title: "Appointment booked",
+          message: "You can login to your account now",
+        });
+
+        console.log("created", res);
+      })
+      .catch((err) => {
+        notifications.showNotification({
+          title: "Account Creation Failed",
+          color: "red",
+          message: "Maybe you already have an account, use different email",
+        });
+        console.error(err);
+      });
+  };
 
   return (
     <>
@@ -71,7 +120,7 @@ function Appointment() {
             <Title order={3}>Basic Details</Title>
             <Space h="md" />
 
-            <form>
+            <form onSubmit={form.onSubmit(handleSubmit)}>
               <Grid grow>
                 <Grid.Col md={6} lg={4}>
                   <TextInput
@@ -108,7 +157,7 @@ function Appointment() {
                     placeholder="Your email"
                     label="Email"
                     icon={<EnvelopeClosedIcon />}
-                    {...form.getInputProps("email")}
+                    {...form.getInputProps("patient_email")}
                   />
                 </Grid.Col>
                 <Grid.Col md={6} lg={3}>
@@ -118,7 +167,7 @@ function Appointment() {
                     placeholder="Address"
                     label="Address"
                     icon={<HomeIcon />}
-                    {...form.getInputProps("address")}
+                    {...form.getInputProps("patient_address")}
                   />
                 </Grid.Col>
                 <Grid.Col md={6} lg={1}>
@@ -133,6 +182,7 @@ function Appointment() {
                       { value: "both", label: "Both" },
                       { value: "none", label: "None" },
                     ]}
+                    {...form.getInputProps("gender")}
                   />
                 </Grid.Col>
               </Grid>
@@ -145,7 +195,7 @@ function Appointment() {
                     placeholder="Contact Number"
                     label="Contact Number"
                     icon={<ChatBubbleIcon />}
-                    {...form.getInputProps("contactnumber")}
+                    {...form.getInputProps("contact_number")}
                   />
                 </Grid.Col>
               </Grid>
@@ -170,9 +220,10 @@ function Appointment() {
                       { value: "three", label: "" },
                       { value: "four", label: "None" },
                     ]}
+                    {...form.getInputProps("hospital")}
                   />
                 </Grid.Col>
-                <Grid.Col md={6} lg={3}>
+                <Grid.Col md={6} lg={2}>
                   <Select
                     placeholder="Select One"
                     label="Department"
@@ -184,20 +235,28 @@ function Appointment() {
                       { value: "general", label: "General" },
                       { value: "childdisease", label: "Chlid Disease" },
                     ]}
+                    {...form.getInputProps("department")}
                   />
                 </Grid.Col>
-                <Grid.Col md={6} lg={3}>
-                  <Select
-                    placeholder="Select One"
-                    label="Doctor"
+                <Grid.Col md={6} lg={1}>
+                  <DatePicker
                     mt="md"
-                    required
-                    data={[
-                      { value: "male", label: "Makka Madina" },
-                      { value: "female", label: "Bigyan Prasad" },
-                      { value: "both", label: "Bishab Kumar" },
-                      { value: "none", label: "Gannu Kaka" },
-                    ]}
+                    placeholder="Pick date"
+                    label="Event date"
+                    icon={<Calendar size={16} />}
+                    {...form.getInputProps("date")}
+
+                  />
+                </Grid.Col>
+
+                <Grid.Col md={6} lg={1}>
+                  <TimeInput
+                    mt="md"
+                    label="Pick time"
+                    placeholder="Pick time"
+                    icon={<Clock size={16} />}
+                    defaultValue={new Date()}
+                    {...form.getInputProps("time")}
                   />
                 </Grid.Col>
               </Grid>
@@ -210,8 +269,17 @@ function Appointment() {
                     If you have any previous report and complications
                     <Space h="sm" />
                   </Title>
-                  <Dropzone />
+                  <Dropzone {...form.getInputProps("previous_reports")} />
                 </Grid.Col>
+              </Grid>
+              <Grid>
+                <Button
+                  variant="gradient"
+                  type="submit"
+                  gradient={{ from: "indigo", to: "cyan" }}
+                >
+                  Book Appointment
+                </Button>
               </Grid>
             </form>
           </Card>

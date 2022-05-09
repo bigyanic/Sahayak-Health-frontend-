@@ -20,7 +20,7 @@ function HospitalList() {
   }, []);
 
   const arr = data.map((data) => {
-    return (
+    return ( 
       <tr key={data.name}>
         <td>{data.name}</td>
         <td>{data.address}</td>
