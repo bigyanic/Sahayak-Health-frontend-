@@ -10,25 +10,26 @@ function HospitalList() {
 
   useEffect(() => {
     axios
-      .get("https://corona.askbhunte.com/api/v1/hospitals")
+      .get("https://bigyanic.github.io/assets/Hospitals2.json")
       .then((response) => {
         const res = response.data;
-        setData(res.data);
+        setData(res);
         console.log(res);
       })
       .catch((error) => console.log(error));
   }, []);
 
   const arr = data.map((data) => {
-    return ( 
-      <tr key={data.name}>
+    return (
+      <tr key={data.id}>
         <td>{data.name}</td>
-        <td>{data.address}</td>
+        <td>{data.location}</td>
         <td>{data.phone}</td>
-        <td>{data.contact_person}</td>
-        <td>{data.contact_person_number}</td>
+        <td><a href={data.website}>{data.website}</a></td>
+        <td>{data.description}</td>
+        {/* <td>{data.contact_person_number}</td>
         <td>{data.capacity.beds}</td>
-        <td>{data.capacity.ventilators}</td>
+        <td>{data.capacity.ventilators}</td>  */}
       </tr>
     );
   });
@@ -44,10 +45,8 @@ function HospitalList() {
               <th>Name</th>
               <th>Address</th>
               <th>Phone</th>
-              <th>Contact Person</th>
-              <th>Conttact Person Number</th>
-              <th>Beds</th>
-              <th>Ventilators</th>
+              <th>Website</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody>{arr}</tbody>
