@@ -2,6 +2,8 @@ import { React, useEffect, useState } from "react";
 import { Accordion } from "@mantine/core";
 import axios from "axios";
 import { Title, Space, useMantineTheme, ScrollArea } from "@mantine/core";
+import Parser from 'html-react-parser';
+
 
 function Faq() {
   const theme = useMantineTheme();
@@ -12,10 +14,10 @@ function Faq() {
 
   useEffect(() => {
     axios
-      .get("https://corona.askbhunte.com/api/v1/faqs")
+      .get("https://nyc-cto.github.io/coronavirus-answers/answers.json")
       .then((response) => {
         const res = response.data;
-        setData(res.data);
+        setData(res);
         console.log(res);
       })
       .catch((error) => console.log(error));
@@ -24,7 +26,7 @@ function Faq() {
   const arr = data.map((data) => {
     return (
       <Accordion>
-        <Accordion.Item label={data.question}>{data.answer}</Accordion.Item>
+        <Accordion.Item label={data.title}>{Parser(data.content)}</Accordion.Item>
       </Accordion>
     );
   });
