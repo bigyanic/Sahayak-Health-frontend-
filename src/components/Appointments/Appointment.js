@@ -83,22 +83,21 @@ function Appointment() {
       department: values.department,
       date: values.date,
       time: values.time,
-      previous_reports: values.previous_reports,
     })
       .then((res) => {
         setLoading(false);
         notifications.showNotification({
           title: "Appointment booked",
-          message: "You can login to your account now",
+          message: "Your appointment has been booked",
         });
 
         console.log("created", res);
       })
       .catch((err) => {
         notifications.showNotification({
-          title: "Account Creation Failed",
+          title: "Appointment Booking Failed",
           color: "red",
-          message: "Maybe you already have an account, use different email",
+          message: JSON.stringify(err.response.data),
         });
         console.error(err);
       });
@@ -120,7 +119,7 @@ function Appointment() {
             <Title order={3}>Basic Details</Title>
             <Space h="md" />
 
-            <form onSubmit={form.onSubmit(handleSubmit)}>
+            <form onSubmit={(e)=>{e.preventDefault(); handleSubmit(form.values)}}>
               <Grid grow>
                 <Grid.Col md={6} lg={4}>
                   <TextInput
@@ -128,7 +127,7 @@ function Appointment() {
                     required
                     placeholder="Your first name"
                     label="First name"
-                    {...form.getInputProps("firstName")}
+                    {...form.getInputProps("firstname")}
                   />
                 </Grid.Col>
                 <Grid.Col md={6} lg={4}>
@@ -136,7 +135,7 @@ function Appointment() {
                     required
                     placeholder="Your last name"
                     label="Last name"
-                    {...form.getInputProps("lastName")}
+                    {...form.getInputProps("lastname")}
                   />
                 </Grid.Col>
                 <Grid.Col md={6} lg={1}>
@@ -177,8 +176,8 @@ function Appointment() {
                     mt="md"
                     required
                     data={[
-                      { value: "male", label: "Male" },
-                      { value: "female", label: "Female" },
+                      { value: "Male", label: "Male" },
+                      { value: "Female", label: "Female" },
                       { value: "both", label: "Both" },
                       { value: "none", label: "None" },
                     ]}
@@ -199,14 +198,7 @@ function Appointment() {
                   />
                 </Grid.Col>
               </Grid>
-            </form>
-          </Card>
-          <Space h="sm" />
-          <Card shadow="sm" padding="lg">
-            <Title order={3}>Appointment Details</Title>
-            <Space h="md" />
-
-            <form>
+         
               <Grid grow>
                 <Grid.Col md={6} lg={3}>
                   <Select
@@ -271,7 +263,7 @@ function Appointment() {
                   <Dropzone {...form.getInputProps("previous_reports")} />
                 </Grid.Col>
               </Grid>
-              <Grid>
+              <Grid grow>
                 <Button
                   variant="gradient"
                   type="submit"
@@ -280,8 +272,10 @@ function Appointment() {
                   Book Appointment
                 </Button>
               </Grid>
+              
+
             </form>
-          </Card>
+            </Card>
         </div>
       </ScrollArea>
     </>
