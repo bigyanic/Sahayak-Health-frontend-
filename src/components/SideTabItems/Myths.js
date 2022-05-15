@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
-import { Accordion } from "@mantine/core";
+import { Avatar } from "@mantine/core";
 import axios from "axios";
-import { Title, Space, useMantineTheme, ScrollArea } from "@mantine/core";
+import { Title, Space, useMantineTheme, ScrollArea, Table } from "@mantine/core";
 
 function Faq() {
   const theme = useMantineTheme();
@@ -12,10 +12,10 @@ function Faq() {
 
   useEffect(() => {
     axios
-      .get("https://corona.askbhunte.com/api/v1/myths")
+      .get("https://bigyanic.github.io/assets/Doctors.json")
       .then((response) => {
         const res = response.data;
-        setData(res.data);
+        setData(res);
         console.log(res);
       })
       .catch((error) => console.log(error));
@@ -23,9 +23,16 @@ function Faq() {
 
   const arr = data.map((data) => {
     return (
-      <Accordion>
-        <Accordion.Item label={data.myth_np}>{data.reality_np}</Accordion.Item>
-      </Accordion>
+      <tr key={data.id}>
+        <td><Avatar src={data.image}></Avatar></td>
+        <td>{data.name}</td>
+        <td>{data.description}</td>
+        {/* <td>{data.phone}</td> */}
+        {/* <td><a href={data.website}>{data.hospital_name}</a></td> */}
+        {/* <td>{data.contact_person_number}</td>
+        <td>{data.capacity.beds}</td>
+        <td>{data.capacity.ventilators}</td>  */}
+      </tr>
     );
   });
 
@@ -35,9 +42,18 @@ function Faq() {
         style={{ height: "82vh", overflowX: "hidden" }}
         offsetScrollbars
       >
-        <Title order={1}>Myths About Covid-19</Title>
-        <Space h="xl" />
-        {arr}
+        <Table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Phone</th>
+              <th>Hospital Name</th>
+            </tr>
+          </thead>
+          <tbody>{arr}</tbody>
+        </Table>
       </ScrollArea>
     </div>
   );
