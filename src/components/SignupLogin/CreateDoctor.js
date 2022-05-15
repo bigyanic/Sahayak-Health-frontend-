@@ -92,6 +92,8 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
   const handleSubmit = (values) => {
     setLoading(true);
     setError(null);
+    console.log({values, formType});
+    
     // setTimeout(() => {
     //   setLoading(false);
     //   setError(
@@ -101,7 +103,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
     //   );
     // }, 3000);
     if (formType === "register") {
-      Axios.post("http://20.41.221.66:7000/doctor/postreg", {
+      Axios.post("http://20.41.221.66:7000/doctor/postreg/", {
         first_name: values.first_name,
         last_name: values.last_name,
         age: values.age,
@@ -178,19 +180,19 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 ...style,
               }}
             >
-              <form onSubmit={form.onSubmit(handleSubmit)}>
+              <form onSubmit={(e)=>{e.preventDefault(); handleSubmit(form.values)}}>
                 {formType === "register" && (
                   <Group grow>
                     <TextInput
                       data-autofocus
-                      required
+                      // required
                       placeholder="Your first name"
                       label="First name"
                       {...form.getInputProps("first_name")}
                     />
 
                     <TextInput
-                      required
+                      // required
                       placeholder="Your last name"
                       label="Last name"
                       {...form.getInputProps("last_name")}
@@ -205,14 +207,14 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                       placeholder="Your age"
                       label="Your age"
                       {...form.getInputProps("age")}
-                      required
+                      // required
                     />
 
                     <Select
                       placeholder="Select One"
                       label="Gender"
                       mt="md"
-                      required
+                      // required
                       data={[
                         { value: "Male", label: "Male" },
                         { value: "Female", label: "Female" },
@@ -226,7 +228,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {(formType === "register" || formType === "login") && (
                   <TextInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Your email"
                     label="Email"
                     icon={<EnvelopeClosedIcon />}
@@ -236,7 +238,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {(formType === "register" || formType === "login") && (
                   <PasswordInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Password"
                     label="Password"
                     icon={<LockClosedIcon />}
@@ -249,7 +251,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {formType === "register" && (
                   <PasswordInput
                     mt="md"
-                    required
+                    // required
                     label="Confirm Password"
                     placeholder="Confirm password"
                     icon={<LockClosedIcon />}
@@ -259,7 +261,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {formType === "register" && (
                   <TextInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Address"
                     label="Address"
                     icon={<EnvelopeClosedIcon />}
@@ -269,7 +271,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {formType === "register" && (
                   <TextInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Contact Number"
                     label="Contact Number"
                     icon={<ChatBubbleIcon />}
@@ -279,7 +281,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {formType === "register" && (
                   <TextInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Nationality"
                     label="Nationality"
                     icon={<GlobeIcon />}
@@ -294,7 +296,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     placeholder="Experience (Years)"
                     label="Experience"
                     {...form.getInputProps("experience_years")}
-                    required
+                    // required
                   />
                 )}
                 {formType === "register" && (
@@ -302,7 +304,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     placeholder="Select One"
                     label="Home Visit Availability"
                     mt="md"
-                    required
+                    // required
                     data={[
                       { value: "true", label: "Yes" },
                       { value: "false", label: "No" },
@@ -313,7 +315,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                 {formType === "register" && (
                   <TextInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Stay Location"
                     label="Stay Location"
                     icon={<GlobeIcon />}
@@ -325,7 +327,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     placeholder="Select One"
                     label="Marital Status"
                     mt="md"
-                    required
+                    // required
                     data={[
                       { value: "Married", label: "Married" },
                       { value: "Unmarried", label: "Unmarried" },
@@ -337,7 +339,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                  {formType === "register" && (
                   <TextInput
                     mt="md"
-                    required
+                    // required
                     placeholder="Working Days"
                     label="Working Days"
                     icon={<GlobeIcon />}

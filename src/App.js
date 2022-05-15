@@ -20,7 +20,7 @@ function App() {
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider
-        theme={{ colorScheme, fontFamily: "Poppins" }}
+        theme={{ colorScheme}}
         withGlobalStyles
       >
         <NotificationsProvider>

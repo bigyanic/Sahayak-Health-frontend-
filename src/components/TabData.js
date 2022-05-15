@@ -2,13 +2,14 @@ import {
   BackpackIcon,
   CalendarIcon,
   CameraIcon,
-  Half1Icon,
   HomeIcon,
   QuestionMarkCircledIcon,
   RocketIcon,
   TableIcon,
 } from "@modulz/radix-icons";
-
+import {
+  Bus, Stethoscope
+} from 'tabler-icons-react';
 const TABS = [
   {
     key: "home",
@@ -36,15 +37,20 @@ const TABS = [
     icon: <RocketIcon />,
   },
   {
-    key: "myths",
-    label: "Myths",
-    icon: <Half1Icon />,
+    key: "ambulance",
+    label: "Ambulance",
+    icon: <Bus />,
   },
   {
     key: "appointment",
     label: "Appointment",
     icon: <CalendarIcon />,
   },
+  {
+    key: "docList",
+    label: "Doctors in Nepal",
+    icon: <Stethoscope />,
+  }
   // {
   //   key: "createuser",
   //   label: "USER",
