@@ -27,15 +27,14 @@ function News() {
   useEffect(() => {
     axios
       .get(
-        `https://corona.askbhunte.com/api/v1/news?limit=${NEWS_PER_PAGE}&start=${
+        `https://api.coronatracker.com/news/trending?countryCode=NP&country=Nepal&language=en&limit=${NEWS_PER_PAGE}&offset=${
           (page - 1) * NEWS_PER_PAGE + 1
-        }`
-      )
+        }`)
       .then((response) => {
         const res = response.data;
         console.log(res.total);
         setTotal(Math.ceil(res.total / NEWS_PER_PAGE));
-        setData(res.data);
+        setData(res.items);
         console.log(res);
       })
       .catch((error) => console.log(error));
@@ -48,7 +47,7 @@ function News() {
           <Card shadow="sm" padding="lg">
             <Card.Section>
               {/* Image URL */}
-              <Image src={data.image_url} height={160} />
+              <Image src={data.urlToImage} height={160} />
             </Card.Section>
 
             <Group
@@ -68,7 +67,7 @@ function News() {
                 {data.title}
               </Text>
               <Badge color="pink" variant="light">
-                {data.source}
+                {data.siteName}
               </Badge>
             </Group>
 
@@ -82,7 +81,7 @@ function News() {
                 overflow: "clip",
               }}
             >
-              {data.summary}
+              {data.description}
             </Text>
 
             <Button
