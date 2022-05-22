@@ -112,7 +112,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
         nationality: values.nationality,
         highest_qualification: values.highest_qualification,
         working_hospital: values.working_days,
-        license_proof: values.license_proof,
         experience_years: values.experience_years,
         home_visit_availability: values.home_visit_availability,
         stay_location: values.stay_location,
