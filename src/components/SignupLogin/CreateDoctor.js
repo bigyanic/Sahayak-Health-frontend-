@@ -111,7 +111,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
         contact_number: values.contact_number,
         nationality: values.nationality,
         highest_qualification: values.highest_qualification,
-        working_hospital: values.working_days,
+        working_hospital: values.working_hospital,
         experience_years: values.experience_years,
         home_visit_availability: values.home_visit_availability,
         stay_location: values.stay_location,
@@ -289,6 +289,15 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<GlobeIcon />}
                     {...form.getInputProps("stay_location")}
                   />
+                  <TextInput
+                    mt="md"
+                    // required
+                    placeholder="Working Hospital"
+                    label="Working Hospital"
+                    icon={<GlobeIcon />}
+                    {...form.getInputProps("working_hospital")}
+                  />
+              
               
                   <Select
                     placeholder="Select One"
