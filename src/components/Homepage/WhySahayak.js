@@ -34,7 +34,7 @@ function WhySahayak() {
           <Card shadow="sm" padding="xl">
             <Card.Section>
               <Image
-                src="https://www.unicef.org/sites/default/files/styles/press_release_feature/public/LUX_3090.JPG?itok=HsBFuep-"
+                src="https://images.unsplash.com/photo-1619025873875-59dfdd2bbbd6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"
                 height={190}
                 alt="Norway"
               />
@@ -44,13 +44,13 @@ function WhySahayak() {
               position="apart"
               style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
             >
-              <Text weight={500}>Norway Fjord Adventures</Text>
+              <Title order={4}>24 x 7 Ambulance Information</Title>
             </Group>
 
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-              With Fjord Tours you can explore more of the magical fjord
-              landscapes with tours and activities on and around the fjords of
-              Norway
+              On the Ambulance tab, you can find the contact details of the
+              Ambulance service of different places. You will no longer need to
+              search for urgent contact details of ambulance in an emergency.
             </Text>
           </Card>
         </div>
@@ -59,7 +59,7 @@ function WhySahayak() {
           <Card shadow="sm" padding="xl">
             <Card.Section>
               <Image
-                src="https://www.smchealth.org/sites/main/files/imagecache/thumbnail/main-images/latino_child_atdoctor.jpg?1578406232"
+                src="https://media.istockphoto.com/photos/thoughtful-afroamerican-person-touches-beard-on-pink-picture-id1343478786?b=1&k=20&m=1343478786&s=170667a&w=0&h=BoSyVZFBJFwlxcC1z2tzG_C0C5-DlI2f5SS1y4tPhBg="
                 height={190}
                 alt="Norway"
               />
@@ -69,13 +69,13 @@ function WhySahayak() {
               position="apart"
               style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
             >
-              <Text weight={500}>Norway Fjord Adventures</Text>
+              <Title order={4}>Confused? Visit FAQs for Answers!</Title>
             </Group>
 
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-              With Fjord Tours you can explore more of the magical fjord
-              landscapes with tours and activities on and around the fjords of
-              Norway
+              Find the frequently asked questions for Covid-19 in our FAQs
+              section. You will no longer get confused over the common issues
+              and problems of Covid-19 anymore.
             </Text>
           </Card>
         </div>
@@ -84,7 +84,7 @@ function WhySahayak() {
           <Card shadow="sm" padding="xl">
             <Card.Section>
               <Image
-                src="https://previews.123rf.com/images/oksun70/oksun701508/oksun70150800027/43214148-m%C3%A9decin-examens-infantile-enfant-gar%C3%A7on-pour-enfants-avec-st%C3%A9thoscope.jpg"
+                src="https://media.istockphoto.com/photos/chatbot-ai-artificial-intelligence-technology-concept-picture-id1329694918?b=1&k=20&m=1329694918&s=170667a&w=0&h=x-vm_YVSqgVYTkongWYk7jQxSIDw9McxUfS4A3LuvWI="
                 height={190}
                 alt="Norway"
               />
@@ -94,13 +94,13 @@ function WhySahayak() {
               position="apart"
               style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
             >
-              <Text weight={500}>Norway Fjord Adventures</Text>
+              <Title order={4}>Chat With Sahayak</Title>
             </Group>
 
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-              With Fjord Tours you can explore more of the magical fjord
-              landscapes with tours and activities on and around the fjords of
-              Norway
+              Now you can chat with our conversational AI bot Sahayak to
+              self-assess Covid-19 symptoms, check your appointment details, get
+              the insurance information and many more.
             </Text>
           </Card>
         </div>

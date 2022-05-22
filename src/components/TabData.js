@@ -6,10 +6,9 @@ import {
   QuestionMarkCircledIcon,
   RocketIcon,
   TableIcon,
+  ReaderIcon,
 } from "@modulz/radix-icons";
-import {
-  Bus, Stethoscope
-} from 'tabler-icons-react';
+
 const TABS = [
   {
     key: "home",
@@ -22,9 +21,9 @@ const TABS = [
     icon: <CameraIcon />,
   },
   {
-    key: "faq",
-    label: "FAQ",
-    icon: <QuestionMarkCircledIcon />,
+    key: "appointment",
+    label: "Appointment",
+    icon: <CalendarIcon />,
   },
   {
     key: "hospitals",
@@ -32,25 +31,28 @@ const TABS = [
     icon: <TableIcon />,
   },
   {
-    key: "news",
-    label: "News",
-    icon: <RocketIcon />,
+    key: "docList",
+    label: "Doctors in Nepal",
+    icon: <BackpackIcon />,
   },
   {
     key: "ambulance",
     label: "Ambulance",
-    icon: <Bus />,
+    icon: <RocketIcon />,
   },
   {
-    key: "appointment",
-    label: "Appointment",
-    icon: <CalendarIcon />,
+    key: "news",
+    label: "News",
+    icon: <ReaderIcon />,
   },
+  
+
   {
-    key: "docList",
-    label: "Doctors in Nepal",
-    icon: <Stethoscope />,
-  }
+    key: "faq",
+    label: "FAQ",
+    icon: <QuestionMarkCircledIcon />,
+  },
+ 
   // {
   //   key: "createuser",
   //   label: "USER",
