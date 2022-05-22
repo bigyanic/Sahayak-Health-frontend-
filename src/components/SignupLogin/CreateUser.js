@@ -83,7 +83,7 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
         ),
       contactnumber: (value) =>
         formType === "login" ||
-        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
+        /^(\+|00)[1-9][0-9 \-\(\)\.]{7,32}$/.test(value),
       confirmPassword: (val, value) =>
         formType === "login" || val === value.pswrd,
       termsOfService: (value) => formType === "login" || /^(true)$/.test(value),

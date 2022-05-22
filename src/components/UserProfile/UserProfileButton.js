@@ -1,6 +1,6 @@
 import React from "react";
 import { UnstyledButton, Group, Avatar,Menu, Text } from "@mantine/core";
-import { Settings, Anchor, Photo, MessageCircle, Trash, ArrowsLeftRight } from 'tabler-icons-react';
+import {  Anchor, Photo, MessageCircle, Trash, ArrowsLeftRight,UserCircle } from 'tabler-icons-react';
 
 import { useNavigate, useLocation } from "react-router";
 import { ChevronRightIcon } from "@modulz/radix-icons";
@@ -11,6 +11,10 @@ function UserProfileButton() {
   const onClickLoginSignup = () => {
     navigate(`/signupas`);
   };
+  const onClickUserProfile= () => {
+    navigate(`/userprofile`);
+  };
+
 
   return (
     <Menu control={
@@ -30,8 +34,7 @@ function UserProfileButton() {
     </UnstyledButton>}>
     <Menu.Label>Application</Menu.Label>
       <Menu.Item icon={<Anchor size={14} />} onClick={onClickLoginSignup}>Login & Signup</Menu.Item>
-      <Menu.Item icon={<MessageCircle size={14} />}>Messages</Menu.Item>
-      <Menu.Item icon={<Photo size={14} />}>Gallery</Menu.Item>
+      <Menu.Item icon={<UserCircle size={14} />} onClick={onClickUserProfile}>User Profile</Menu.Item>
     
     </Menu>
   );
