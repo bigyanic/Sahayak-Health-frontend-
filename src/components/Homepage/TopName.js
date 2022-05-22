@@ -14,10 +14,10 @@ function TopName() {
 
       {/* <Title order={1}>Sahayak Health</Title> */}
       <Space h={10} />
-      <p>
+      <Text size="lg">
         Use it to create cards, dropdowns, modals and other components that
         require background with shadow
-      </p>
+      </Text>
       <Space h={40} />
 
     </div>
