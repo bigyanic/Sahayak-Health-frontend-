@@ -26,7 +26,6 @@ import { useNotifications } from "@mantine/notifications";
 import { useNavigate, useLocation } from "react-router";
 
 export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
-  const [formType, setFormType] = useState("register");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,7 +34,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
 
 
   const toggleFormType = () => {
-    setFormType((current) => (current === "register" ? "login" : "register"));
     setError(null);
   };
 
@@ -63,8 +61,8 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
     },
 
     validationRules: {
-      firstName: (value) => formType === "login" || value.trim().length >= 2,
-      lastName: (value) => formType === "login" || value.trim().length >= 2,
+      firstName: (value) =>  value.trim().length >= 2,
+      lastName: (value) => value.trim().length >= 2,
       email: (value) =>
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value),
       password: (value) =>
@@ -72,11 +70,10 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
           value
         ),
       contact_number: (value) =>
-        formType === "login" ||
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value),
       confirmpassword: (val, value) =>
-        formType === "login" || val === value.pswrd,
-      termsOfService: (value) => formType === "login" || /^(true)$/.test(value),
+        val === value.pswrd,
+      termsOfService: (value) => /^(true)$/.test(value),
     },
 
     errorMessages: {
@@ -92,7 +89,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
   const handleSubmit = (values) => {
     setLoading(true);
     setError(null);
-    console.log({values, formType});
+    console.log({values});
     
     // setTimeout(() => {
     //   setLoading(false);
@@ -102,7 +99,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
     //       : "User with this email does not exist"
     //   );
     // }, 3000);
-    if (formType === "register") {
+    
       Axios.post("http://20.41.221.66:7000/doctor/postreg/", {
         first_name: values.first_name,
         last_name: values.last_name,
@@ -139,25 +136,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
           });
           console.error(err);
         });
-    } else {
-      // console.log("loginpage");
-      Axios.post("http://20.41.221.66:7000/userlogin/", {
-        email: values.email,
-        password: values.password,
-      })
-        .then((res) => {
-          // setLoading(false);
-          console.log("loggedin", res);
-        })
-        .catch((err) => {
-          // console.err("error", err);
-          notifications.showNotification({
-            title: "Login Failed",
-            color: "red",
-            message: "Incorrect Email or Password🤥",
-          });
-        });
-    }
+   
   };
 
   return (
@@ -181,7 +160,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
               }}
             >
               <form onSubmit={(e)=>{e.preventDefault(); handleSubmit(form.values)}}>
-                {formType === "register" && (
                   <Group grow>
                     <TextInput
                       data-autofocus
@@ -198,8 +176,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                       {...form.getInputProps("last_name")}
                     />
                   </Group>
-                )}
-                {formType === "register" && (
                   <Group grow>
                     <NumberInput
                       mt="md"
@@ -224,8 +200,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                       {...form.getInputProps("gender")}
                     />
                   </Group>
-                )}
-                {(formType === "register" || formType === "login") && (
                   <TextInput
                     mt="md"
                     // required
@@ -234,8 +208,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<EnvelopeClosedIcon />}
                     {...form.getInputProps("email")}
                   />
-                )}
-                {(formType === "register" || formType === "login") && (
                   <PasswordInput
                     mt="md"
                     // required
@@ -245,10 +217,8 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     onFocus={() => {
                       form.validateField("password");
                     }}
-                    {...form.getInputProps("passowrd")}
+                    {...form.getInputProps("password")}
                   />
-                )}
-                {formType === "register" && (
                   <PasswordInput
                     mt="md"
                     // required
@@ -257,8 +227,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<LockClosedIcon />}
                     {...form.getInputProps("confirm_password")}
                   />
-                )}
-                {formType === "register" && (
                   <TextInput
                     mt="md"
                     // required
@@ -267,8 +235,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<EnvelopeClosedIcon />}
                     {...form.getInputProps("address")}
                   />
-                )}
-                {formType === "register" && (
                   <TextInput
                     mt="md"
                     // required
@@ -277,8 +243,6 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<ChatBubbleIcon />}
                     {...form.getInputProps("contact_number")}
                   />
-                )}
-                {formType === "register" && (
                   <TextInput
                     mt="md"
                     // required
@@ -287,9 +251,18 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<GlobeIcon />}
                     {...form.getInputProps("nationality")}
                   />
-                )}
-                
-                {formType === "register" && (
+                  <Select
+                    placeholder="Select One"
+                    label="Highest Qualification"
+                    mt="md"
+                    // required
+                    data={[
+                      { value: "MBBS", label: "MBBS" },
+                      { value: "MD", label: "MD" },
+                      { value: "BDS", label: "BDS" },
+                    ]}
+                    {...form.getInputProps("highest_qualification")}
+                  />
                   <NumberInput
                     mt="md"
                     defaultValue={5}
@@ -298,21 +271,17 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     {...form.getInputProps("experience_years")}
                     // required
                   />
-                )}
-                {formType === "register" && (
                   <Select
                     placeholder="Select One"
                     label="Home Visit Availability"
                     mt="md"
                     // required
                     data={[
-                      { value: "true", label: "Yes" },
-                      { value: "false", label: "No" },
+                      { value: "True", label: "Yes" },
+                      { value: "False", label: "No" },
                     ]}
-                    {...form.getInputProps("home_visit_availablity")}
+                    {...form.getInputProps("home_visit_availability")}
                   />
-                )}
-                {formType === "register" && (
                   <TextInput
                     mt="md"
                     // required
@@ -321,8 +290,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<GlobeIcon />}
                     {...form.getInputProps("stay_location")}
                   />
-                )}
-                {formType === "register" && (
+              
                   <Select
                     placeholder="Select One"
                     label="Marital Status"
@@ -335,8 +303,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     ]}
                     {...form.getInputProps("marital_status")}
                   />
-                )}
-                 {formType === "register" && (
+               
                   <TextInput
                     mt="md"
                     // required
@@ -345,8 +312,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                     icon={<GlobeIcon />}
                     {...form.getInputProps("working_days")}
                   />
-                )}
-                {formType === "register" && (
+
                   <Checkbox
                     mt="xl"
                     label="I agree to sell my soul and privacy to this corporation"
@@ -357,7 +323,7 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                       type: "checkbox",
                     })}
                   />
-                )}
+                
                 {error && (
                   <Text color="red" size="sm" mt="sm">
                     {error}
@@ -372,13 +338,11 @@ export function CreateDoctor({ noShadow, noPadding, noSubmit, style }) {
                       onClick={toggleFormType}
                       size="sm"
                     >
-                      {formType === "register"
-                        ? "Have an account? Login"
-                        : "Don't have an account? Register"}
+                     
                     </Anchor>
 
                     <Button color="blue" type="submit">
-                      {formType === "register" ? "Next" : "Login"}
+                      Register
                     </Button>
                   </Group>
                 )}
