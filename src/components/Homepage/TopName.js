@@ -15,8 +15,7 @@ function TopName() {
       {/* <Title order={1}>Sahayak Health</Title> */}
       <Space h={10} />
       <Text size="lg">
-        Use it to create cards, dropdowns, modals and other components that
-        require background with shadow
+      Your all-in-one solution to the healthcare problems. Book an appointment, perform Covid-19 self-assessment, check live data and many more!
       </Text>
       <Space h={40} />
 

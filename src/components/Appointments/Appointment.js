@@ -207,10 +207,24 @@ function Appointment() {
                     mt="md"
                     required
                     data={[
-                      { value: "one", label: "Gandaki Regional Hospital" },
-                      { value: "two", label: "Manipal Teaching Hospital" },
-                      { value: "three", label: "" },
-                      { value: "four", label: "None" },
+                      { value: "Bheri Zonal Hospital", label: "Bheri Zonal Hospital" },
+                      { value: "Lumbini Provincial Hospital", label: "Lumbini Provincial Hospital" },
+                      { value: "Nepal Cancer Hospital", label: "Nepal Cancer Hospital" },
+                      { value: "Bhaktapur Cancer Hospital", label: "Bhaktapur Cancer Hospital" },
+                      { value: "Sushil Koirala Prakhar Cancer Hospital", label: "Sushil Koirala Prakhar Cancer Hospital" },
+                      { value: "Civil Service Hospital of Nepal", label: "Civil Service Hospital of Nepal	" },
+                      { value: "Shukraraaj Tropical & Infectious Disease Hospital", label: "Shukraraaj Tropical & Infectious Disease Hospital	" },
+                      { value: "Bir Hospital", label: "Bir Hospital" },
+                      { value: "Gandaki Medical College Teaching Hospital & Research Centre", label: "Gandaki Medical College Teaching Hospital & Research Centre" },
+                      { value: "National Trauma Center", label: "National Trauma Center" },
+                      { value: "Vayodha Hospital", label: "Vayodha Hospital	" },
+                      { value: "Dhulikhel Hospital", label: "Dhulikhel Hospital" },
+                      { value: "Grande International Hospital", label: "Grande International Hospital" },
+                      { value: "T.U Teaching Hospital", label: "T.U Teaching Hospital" },
+                      { value: "B.P Koirala Institute of Health Science", label: "B.P Koirala Institute of Health Science" },
+                      { value: "Chitwan Medical College Teaching Hospital", label: "Chitwan Medical College Teaching Hospital	" },
+
+
                     ]}
                     {...form.getInputProps("hospital")}
                   />
@@ -222,10 +236,24 @@ function Appointment() {
                     mt="md"
                     required
                     data={[
-                      { value: "ent", label: "ENT" },
-                      { value: "mental", label: "Mental" },
-                      { value: "general", label: "General" },
-                      { value: "childdisease", label: "Chlid Disease" },
+                      { value: "Physiotherapy", label: "Physiotherapy" },
+                      { value: "Orthopedic", label: "Orthopedic" },
+                      { value: "Pediatrics", label: "Pediatrics" },
+                      { value: "Psychology", label: "Psychology" },
+                      { value: "Pediatrics", label: "Pediatrics" },
+                      { value: "Radiology", label: "Radiology" },
+                      { value: "Surgery", label: "Surgery" },
+                      { value: "Gynaecology & Obstetrics", label: "Gynaecology & Obstetrics" },
+                      { value: "Cardiology", label: "Cardiology" },
+                      { value: "Neurology", label: "Neurology" },
+                      { value: "General Medicine", label: "General Medicine" },
+                      { value: "Dental", label: "Dental" },
+                      { value: "Dermatology", label: "Dermatology" },
+                      { value: "Ophthalmology", label: "Ophthalmology" },
+
+                      
+
+
                     ]}
                     {...form.getInputProps("department")}
                   />
