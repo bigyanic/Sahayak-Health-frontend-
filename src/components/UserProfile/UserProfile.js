@@ -6,12 +6,13 @@ import {
   Badge,
   Image,
   Text,
-  Grid,
+  SimpleGrid,
   Space,
   Title,
   ScrollArea,
   Group,
   useMantineTheme,
+  Container,
 } from "@mantine/core";
 import AppointmentList from "./AppointmentList";
 import ProfileImage from "./ProfileImage";
@@ -28,19 +29,17 @@ function MainProfile() {
         style={{ height: "82vh", overflowX: "hidden" }}
         offsetScrollbars
       >
-        <Paper>
-          <Group>
-            <Grid>
-              <Grid.Col span={6}>
-                <UserDetails />
-                <BmiCalculator />
-              </Grid.Col>
-              <Grid.Col span={6}>
-                <AppointmentList />
-              </Grid.Col>
-            </Grid>
-          </Group>
-        </Paper>
+        <Container size={"xl"}>
+          <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+            <UserDetails />
+            <AppointmentList />
+            <BmiCalculator />
+          
+
+            {/* </SimpleGrid>
+              <SimpleGrid cols={1}> */}
+          </SimpleGrid>
+        </Container>
       </ScrollArea>
     </div>
   );

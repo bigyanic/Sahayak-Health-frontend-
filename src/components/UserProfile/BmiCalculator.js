@@ -1,6 +1,7 @@
 import {React,useState} from 'react'
-import { NumberInput, Slider, Button, Group,Title,Space, Box } from '@mantine/core';
+import { NumberInput, Slider, Button, Group, Title, Space, Box, Paper } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { Card } from '@mantine/core';
 
 
 function BmiCalculator() {
@@ -48,7 +49,7 @@ const Calculation=(values)=>{
 
   return (
     <div>
-      <Box sx={{ maxWidth: 500 }} mx="auto">
+      <Card >
       <Space h={50} />
       
       <Title order={2}>BMI Calculator</Title>
@@ -79,7 +80,7 @@ const Calculation=(values)=>{
 
     <p>Your BMI is: {bmi} </p>
             <p>You are currently: {status}</p>
-            </Box>
+            </Card>
 
     </div>
     
