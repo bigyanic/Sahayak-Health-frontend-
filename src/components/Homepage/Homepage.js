@@ -9,6 +9,7 @@ import {
   Space,
   useMantineTheme,
 } from "@mantine/core";
+import Mobileapp from "./Mobileapp";
 import TopName from "./TopName";
 import WhySahayak from "./WhySahayak";
 
@@ -45,6 +46,8 @@ function Homepage() {
               <Space h="xl" />
 
               <WhySahayak />
+              <Space h="xl" />
+              <Mobileapp/>
             </Card>
           </div>
         </div>

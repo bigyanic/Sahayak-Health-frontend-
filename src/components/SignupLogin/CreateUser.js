@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import { useForm } from "@mantine/hooks";
+import { useLocalStorageValue } from '@mantine/hooks';
+
 import { useModals } from "@mantine/modals";
 
 import {
@@ -52,6 +54,10 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
   //   navigate(`/verifyemail`);
   // };
   
+  const [userEmail, setUserEmail] = useLocalStorageValue({
+    key: 'userEmail',
+    defaultValue: 'sbiiigyan9@gmail.com',
+  });
 
   const toggleFormType = () => {
     setFormType((current) => (current === "register" ? "login" : "register"));
@@ -97,8 +103,9 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
       confirmPassword: "Passwords don't match. Try again",
       termsOfService: "You must accept our terms",
     },
+    
   });
-
+ 
 
 
   const handleSubmit = (values) => {
@@ -160,6 +167,9 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
           });
         });
     }
+    //local storage
+   setUserEmail(values.email);
+    console.log("local storage ", userEmail);
   };
 
   return (

@@ -1,17 +1,42 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
+import { useLocalStorageValue } from '@mantine/hooks';
+
 import { Card,Group,Badge, Text, Space, Title, useMantineTheme } from "@mantine/core";
 function UserDetails() {
   const theme = useMantineTheme();
+  let useremail=localStorage.getItem("useremail");
+console.log("in user details",useremail);
+
 
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
-  return (
+    const [data, setData] = useState([]);
+    const userEmail= localStorage.getItem("userEmail");
+    console.log("in user details",userEmail);
+    useEffect(() => {
+    
+      axios
+        .get(`http://20.41.221.66:7000/patient/getreg/${userEmail},`)
+        .then((response) => {
+          const res = response.data;
+          console.log(res);
+          setData(res);
+        })
+        .catch((error) => console.log(error));
+    }, []);
+
+  // const arr = data.map((data) => {
+    
+  // });
+
+    return (
     <div>
      
       <Space h="xl" />
       <Card shadow="sm" p="lg">
 
-      <Title order={1}>Bigyan Timilsina</Title>
+      <Title order={1}>{data.full_name}</Title>
       <Space w="xl" />
 
       
