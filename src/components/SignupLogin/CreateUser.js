@@ -157,7 +157,9 @@ export function CreateUser({ noShadow, noPadding, noSubmit, style }) {
         .then((res) => {
           // setLoading(false);
           console.log("loggedin", res.data);
-        })
+            if(res.data.msg === "correct password"){
+              navigate(`/userprofile`);
+    }})
         .catch((err) => {
           // console.err("error", err);
           notifications.showNotification({
