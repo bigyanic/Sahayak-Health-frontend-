@@ -270,7 +270,7 @@ function Appointment() {
                     label="Pick time"
                     placeholder="Pick time"
                     icon={<Clock size={16} />}
-                    defaultValue={new Date()}
+                    defaultValue=""
                     {...form.getInputProps("time")}
                   />
                 </Grid.Col>
