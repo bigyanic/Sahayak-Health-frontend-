@@ -250,10 +250,6 @@ function Appointment() {
                       { value: "Dental", label: "Dental" },
                       { value: "Dermatology", label: "Dermatology" },
                       { value: "Ophthalmology", label: "Ophthalmology" },
-
-                      
-
-
                     ]}
                     {...form.getInputProps("department")}
                   />
@@ -291,8 +287,10 @@ function Appointment() {
                   <Dropzone {...form.getInputProps("previous_reports")} />
                 </Grid.Col>
               </Grid>
+              <Space h="xl" />
+
               <Grid grow>
-                <Button
+                <Button 
                   variant="gradient"
                   type="submit"
                   gradient={{ from: "indigo", to: "cyan" }}
