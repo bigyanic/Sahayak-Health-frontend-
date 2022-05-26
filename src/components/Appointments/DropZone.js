@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Group, Text, useMantineTheme } from "@mantine/core";
 import { ImageIcon, UploadIcon, CrossCircledIcon } from "@modulz/radix-icons";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { useNotifications } from '@mantine/notifications';
 
 function ImageUploadIcon({ status, ...props }) {
   if (status.accepted) {
@@ -33,15 +34,42 @@ const fileToDataUri = (file) =>
     reader.readAsDataURL(file);
   });
 
+
+
+
+
 const Uploader = () => {
   const theme = useMantineTheme();
+  const notifications = useNotifications();
   const [files, setFiles] = useState([]);
 
+ const handleUseNotification = (message, description) => {
+   console.log(message, description);
+   try{
+
+     notifications.showNotification({
+              title: "File Uploaded",
+              message:'Hey there, your file has been uploaded.! 😌',
+            
+            });
+
+   }catch(e){
+     console.log(e);
+   }
+   
+    
+  }
+  
+const handleFileChange =(file)=>{
+  setFiles(file);
+  handleUseNotification();
+  
+}
   return (
     // See results in console after dropping files to Dropzone
     <>
       <Dropzone
-        onDrop={(files) => setFiles(files)}
+        onDrop={(files) =>handleFileChange(files[0])}
         onReject={(files) => console.log("rejected files", files)}
         maxSize={3 * 1024 ** 2}
         accept={IMAGE_MIME_TYPE}
@@ -73,6 +101,8 @@ const Uploader = () => {
           </Group>
         )}
       </Dropzone>
+      
+      
     </>
   );
 };
