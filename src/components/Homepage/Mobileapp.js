@@ -21,7 +21,7 @@ function Mobileapp() {
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
 
 function DownloadNow() {
-  window.open("https://play.google.com/store/apps/details?id=com.sahayak.sahayak");
+  window.open("https://cdn-142.anonfiles.com/V96db8k4y6/4daaec67-1653563335/SahayakHealth_v1.1.apk");
   
 }
 
