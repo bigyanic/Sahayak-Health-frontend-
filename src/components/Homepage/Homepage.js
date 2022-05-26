@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   Card,
   Blockquote,
@@ -6,6 +7,7 @@ import {
   Button,
   Group,
   Paper,
+ 
   Space,
   useMantineTheme,
 } from "@mantine/core";
@@ -15,6 +17,7 @@ import WhySahayak from "./WhySahayak";
 
 function Homepage() {
   const theme = useMantineTheme();
+ 
 
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
@@ -25,6 +28,7 @@ function Homepage() {
         style={{ height: "82vh", overflowX: "hidden" }}
         offsetScrollbars
       >
+       
         <div
           style={{
             display: "flex",
