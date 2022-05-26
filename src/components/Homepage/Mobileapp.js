@@ -3,30 +3,47 @@ import {
   Card,
   Grid,
   Button,
+  Group,
   Text,
   Space,
   Title,
   useMantineTheme,
+  Container,
+  Paper,
 } from "@mantine/core";
 import WhySahayak from "./WhySahayak";
+import MobileAppLogo from "./MobileAppLogo";
 
 function Mobileapp() {
   const theme = useMantineTheme();
 
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
+
+function DownloadNow() {
+  window.open("https://play.google.com/store/apps/details?id=com.sahayak.sahayak");
+  
+}
+
   return (
     <div style={{ margin: "auto" }}>
-      <Card>
-        <Grid grow>
-          <Grid.Col span={5}>
-            <Title order={3}>Download Sahayak Health Mobile Application</Title>
-          </Grid.Col>
-          <Grid.Col span={3}>
-            <Button>Download Now!</Button>
-          </Grid.Col>
-        </Grid>
-      </Card>
+      <Paper>
+        <Container>
+        <Space h="md" />
+
+        <Group>
+        
+            <MobileAppLogo/>
+            <Title order={2}> Sahayak Health Mobile Application</Title>
+            <Space w="md" />
+
+            <Button onClick={DownloadNow}>Download Now!</Button>
+       
+        </Group>
+        <Space h="md" />
+
+        </Container>
+      </Paper>
     </div>
   );
 }
